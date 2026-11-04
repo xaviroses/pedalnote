@@ -156,9 +156,10 @@
       margin-top: calc(2 * 1.3125em); // dos líneas en blanco
     }
 
+    // Mínimo 12 px: a 1440 coincide con el XD escalado (16 × 1440 / 1920)
     &__name,
     &__text {
-      font-size: max(#{cpx(16)}, 0.8125rem);
+      font-size: max(#{cpx(16)}, 0.75rem);
     }
   }
 }

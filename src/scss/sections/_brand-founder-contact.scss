@@ -86,7 +86,7 @@
       padding: cpx(110) 0 cpx(60);
 
       p {
-        font-size: max(#{cpx(16)}, 0.8125rem);
+        font-size: max(#{cpx(16)}, 0.75rem); // 12 px mínimo = XD escalado a 1440
         line-height: 1.3125; // 21 / 16
       }
 
