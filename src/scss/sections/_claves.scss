@@ -1,0 +1,60 @@
+@use '../functions' as *;
+
+// ---------------------------------------------------------------------------
+// Banda de claves
+// Escritorio (XD 1920): banda de 765 px, texto a 44 px del borde y 82 px a la izquierda.
+// Móvil (sin diseño en el XD): mismos márgenes y tamaño de texto que el hero móvil.
+// ---------------------------------------------------------------------------
+
+.claves {
+  --u: min(calc(100vw / 393), 1.6px);
+  position: relative;
+  display: flex;
+  min-height: mpx(480);
+  color: var(--color-white);
+  background: var(--color-black);
+
+  &__media {
+    position: absolute;
+    inset: 0;
+
+    img {
+      object-position: 60% 50%; // en móvil, mano y lápiz a la vista
+    }
+
+    // Móvil: velo oscuro arriba para que el texto se lea sobre la foto
+    // (en escritorio el texto ya cae sobre la zona oscura del brazo).
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0) 60%);
+    }
+  }
+
+  &__text {
+    position: relative;
+    align-self: flex-start;
+    padding: mpx(44) mpx(26) mpx(44) mpx(80);
+    @include text-lead;
+  }
+
+  @include mq-wide {
+    min-height: max(#{dpx(765)}, 24rem);
+
+    &__media {
+      img {
+        object-position: 50% 50%;
+      }
+
+      &::after {
+        content: none;
+      }
+    }
+
+    &__text {
+      max-width: calc(var(--gutter) + #{dpx(1060)});
+      padding: max(#{dpx(44)}, 1.5rem) 0 0 var(--gutter);
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@use 'functions' as *;
+
+// Parallax: el marco recorta y la capa interior sobresale por arriba y por abajo
+// (--parallax-extra del alto del marco). parallax.js la desplaza con GSAP al hacer scroll.
+// Sin JS o con movimiento reducido, la capa queda centrada y no se mueve.
+.parallax {
+  --parallax-extra: 0%;
+  position: relative;
+  overflow: hidden;
+
+  &__layer {
+    position: absolute;
+    inset: calc(-1 * var(--parallax-extra)) 0;
+
+    picture,
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  @include mq-wide {
+    --parallax-extra: 15%;
+  }
+}

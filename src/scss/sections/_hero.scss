@@ -60,9 +60,11 @@
     padding: mpx(265) mpx(26) mpx(28) mpx(80);
   }
 
-  &__intro,
+  &__intro {
+    @include text-lead;
+  }
+
   &__title {
-    font-size: mpx(21);
     line-height: var(--lh-heading);
   }
 
@@ -146,7 +148,6 @@
 
     &__intro {
       max-width: #{dpx(1060)}; // no pasa de la unión de las dos fotos
-      font-size: max(#{dpx(38)}, 1.375rem);
     }
 
     &__intro--second {

@@ -46,3 +46,14 @@ $breakpoints: (
 @function dpx($px) {
   @return math.div($px * 100vw, 1920);
 }
+
+// Texto destacado blanco del XD: 21 px en móvil (393), 38 px en escritorio (1920).
+// Usar dentro de un bloque que defina --u (ver .hero / .claves).
+@mixin text-lead {
+  font-size: mpx(21);
+  line-height: var(--lh-heading);
+
+  @include mq-wide {
+    font-size: max(#{dpx(38)}, 1.375rem);
+  }
+}

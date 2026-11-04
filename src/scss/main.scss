@@ -2,6 +2,8 @@
 @use 'fonts';
 @use 'tokens';
 @use 'base';
+@use 'parallax';
 
 // Secciones, en el orden de la página
 @use 'sections/hero';
+@use 'sections/claves';
