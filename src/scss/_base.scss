@@ -12,9 +12,25 @@ html {
 body {
   margin: 0;
   font-family: var(--font-base);
+  font-weight: var(--font-weight);
+  font-size: var(--fs-18);
+  line-height: var(--lh-body);
   color: var(--color-black);
   background: var(--color-white);
   -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+  font-weight: inherit;
+}
+
+a {
+  color: inherit;
 }
 
 img,

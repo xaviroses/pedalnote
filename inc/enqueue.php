@@ -40,3 +40,11 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_dequeue_style( 'wp-block-library' );
 	wp_dequeue_style( 'classic-theme-styles' );
 }, 100 );
+
+// Precarga de la fuente principal (evita el salto de tipografía al cargar).
+add_action( 'wp_head', function () {
+	printf(
+		'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+		esc_url( PEDALNOTE_URI . '/assets/fonts/inter-400-latin.woff2' )
+	);
+}, 1 );

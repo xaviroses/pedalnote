@@ -1,0 +1,16 @@
+@use 'sass:math';
+
+// Viewports de referencia: móvil y artboard de escritorio del XD.
+$vw-min: 375;
+$vw-max: 1920;
+
+@function rem($px) {
+  @return math.div($px, 16) * 1rem;
+}
+
+// Tamaño fluido: $min px a 375 px de ancho → $max px a 1920 px (valor del XD).
+@function fluid($min, $max, $from: $vw-min, $to: $vw-max) {
+  $slope: math.div($max - $min, $to - $from);
+  $intercept: $min - $slope * $from;
+  @return clamp(#{rem($min)}, #{rem($intercept)} + #{$slope * 100}vw, #{rem($max)});
+}
