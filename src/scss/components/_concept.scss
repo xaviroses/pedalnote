@@ -22,7 +22,7 @@
 
   &__canvas {
     position: relative;
-    padding: mpx(64) mpx(26) mpx(72) mpx(80);
+    padding: mpx(96) mpx(26) mpx(120) mpx(80);
   }
 
   // Frase guía: barra + «From … to …»
@@ -48,7 +48,7 @@
 
 // Diagrama de barras escalonadas
 .diagram {
-  margin: 1.75rem 0 0;
+  margin: 2.75rem 0 0;
   padding: 0;
   list-style: none;
   font-size: 0.875rem;
@@ -59,7 +59,7 @@
     gap: 0.5em;
     align-items: center;
     // Escalera: sangría proporcional a la posición x del XD (268–1462 px)
-    margin: 1rem 0 0 calc((100% - 12rem) * clamp(0, (var(--x) - 268) / 1194, 1));
+    margin: 1.75rem 0 0 calc((100% - 12rem) * clamp(0, (var(--x) - 268) / 1194, 1));
     white-space: nowrap;
   }
 
@@ -98,7 +98,7 @@
     position: relative;
     display: block;
     width: mpx(240);
-    margin-bottom: 1.75rem;
+    margin-bottom: 2.5rem;
   }
 
   // Rótulo vertical (INNOVATION): abajo a la derecha, sale por debajo de la sección
@@ -114,12 +114,18 @@
   display: flex;
   gap: 0.25rem;
   justify-content: center;
-  margin-top: 2.5rem;
+  margin-top: 3.5rem;
 
   span {
     width: 0.875rem;
     height: 1.125rem;
   }
+}
+
+// Móvil: la etiqueta lateral ocupa el mismo alto que el contenido (padding del lienzo)
+.concept .side-label {
+  top: mpx(96);
+  bottom: mpx(120);
 }
 
 // Transformation: etiqueta lateral a la derecha (espejo de Innovation)
@@ -219,6 +225,11 @@
       width: cpx(17.5);
       height: cpx(22);
     }
+  }
+
+  .concept .side-label {
+    top: cpx(var(--y)); // anula el ajuste de móvil
+    bottom: auto;
   }
 
   .concept--transformation {
