@@ -11,5 +11,6 @@
 // Secciones, en el orden de la página
 @use 'sections/hero';
 @use 'sections/claves';
+@use 'sections/selected-work';
 // 3 y 5 (Innovation / Transformation) usan components/concept
 // 4 y 6 (tipos de proyecto) usan components/services

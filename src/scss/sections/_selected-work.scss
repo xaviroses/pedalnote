@@ -1,0 +1,146 @@
+@use '../functions' as *;
+
+// ---------------------------------------------------------------------------
+// Selected Work
+// Escritorio (XD, 1920 × 1199): cada caso en su posición; el rectángulo de color
+// (97 × 122) centrado sobre un texto de 372 px, 61 px por encima.
+// Nombre 28 px, claim 18 px, texto 16 px, con 26 px entre líneas.
+// Móvil (sin diseño): columna, con el rectángulo desplazado según su x del XD
+// para conservar la asimetría.
+// ---------------------------------------------------------------------------
+
+.work {
+  --u: min(calc(100vw / 393), 1.6px);
+  position: relative;
+  color: var(--color-white);
+  background: #6b7680;
+
+  &__media {
+    position: absolute;
+    inset: 0;
+
+    // Móvil: velo para leer el texto blanco sobre el fondo claro
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgb(0 0 0 / 0.3);
+    }
+  }
+
+  &__canvas {
+    padding: mpx(64) mpx(26) mpx(72);
+  }
+
+  &__header,
+  &__list {
+    position: relative;
+  }
+
+  &__title {
+    font-size: var(--fs-36);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  &__subtitle {
+    margin-top: 0.5em;
+    font-size: var(--fs-16);
+    text-transform: uppercase;
+  }
+
+  &__case {
+    margin-top: 3rem;
+  }
+
+  &__swatch {
+    display: block;
+    width: 3rem;
+    height: 3.75rem;
+    margin: 0 0 1.25rem calc((100% - 3rem) * var(--x) / 1920);
+  }
+
+  &__name {
+    font-size: var(--fs-24);
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
+  &__claim {
+    margin-top: 0.35em;
+    font-size: var(--fs-16);
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  &__text {
+    margin-top: 1em;
+    font-size: var(--fs-16);
+    line-height: 1.55;
+  }
+
+  // -------------------------------------------------------------------------
+  // Escritorio
+  // -------------------------------------------------------------------------
+  @include mq-wide {
+    &__media::after {
+      content: none;
+    }
+
+    &__canvas {
+      aspect-ratio: 1920 / 1199;
+      padding: 0;
+    }
+
+    &__header {
+      position: absolute;
+      top: cpx(var(--y));
+      left: cpx(var(--x));
+    }
+
+    &__title {
+      font-size: max(#{cpx(36)}, 1.375rem);
+    }
+
+    &__subtitle {
+      margin-top: cpx(4);
+      font-size: max(#{cpx(18)}, 0.75rem);
+    }
+
+    &__list {
+      position: static;
+    }
+
+    // El caso se ancla por su rectángulo: x − 137 (centrado sobre 372 px)
+    &__case {
+      position: absolute;
+      top: cpx(var(--y));
+      left: cpx(calc(var(--x) - 137));
+      width: cpx(372);
+      margin: 0;
+    }
+
+    &__swatch {
+      width: cpx(97);
+      height: cpx(122);
+      margin: 0 auto cpx(61);
+    }
+
+    &__name {
+      font-size: max(#{cpx(28)}, 1rem);
+      line-height: 1;
+    }
+
+    &__claim {
+      margin-top: cpx(8);
+      font-size: max(#{cpx(18)}, 0.75rem);
+      line-height: 1.4444; // 26 / 18
+    }
+
+    &__text {
+      margin-top: cpx(26);
+      font-size: max(#{cpx(16)}, 0.75rem);
+      line-height: 1.625; // 26 / 16
+    }
+  }
+}
