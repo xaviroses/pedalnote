@@ -4,3 +4,7 @@ node_modules/
 .sass-cache/
 *.map
 .env
+
+# Suisse Intl (fuente comercial de Swiss Typefaces): NO se versiona en el repo público.
+# En producción hay que subirla al servidor aparte, con la licencia web comprada.
+assets/fonts/suisse-intl-*

@@ -2,11 +2,10 @@
 
 // ---------------------------------------------------------------------------
 // Selected Work
-// Los casos fluyen (nunca se solapan). Siempre, en cualquier pantalla:
-//   rectángulo 97 × 122 centrado 61 px sobre un texto de máx. 372 px;
-//   nombre 28 px, claim 18 px, texto 16 px, 26 px entre líneas (XD).
+// Los casos fluyen (nunca se solapan). Rectángulo centrado sobre el texto.
+// Desde 900 px, medidas del XD (97 × 122 a 61 px; 28/18/16 px; texto máx. 372 px).
 // Disposición:
-//   < 900 px      → 1 columna, orden de lectura del XD, escalera según la x del XD
+//   < 900 px      → 2 columnas compactas (rectángulo 48 × 60, textos 16/11/12 px)
 //   900–1279 px   → 2 columnas, la derecha desplazada hacia abajo (tamaños fijos)
 //   ≥ 1280 px     → 3 columnas: todo escala en proporción al XD (--s = 1 px del XD),
 //                   como el diseño visto a ese ancho; a 1920 replica el XD
@@ -41,30 +40,31 @@ $work-3col: 1280px;
     }
   }
 
+  // ----- Móvil (< 900 px): 2 columnas compactas ---------------------------------
   &__canvas {
     position: relative;
-    padding: 64px 24px 80px;
+    padding: 48px 16px 112px;
   }
 
   // Cabecera
   &__title {
-    font-size: 36px;
+    font-size: 26px;
     line-height: 1;
     text-transform: uppercase;
   }
 
   &__subtitle {
     margin-top: 4px;
-    font-size: 18px;
+    font-size: 13px;
     text-transform: uppercase;
   }
 
-  // Rejilla: 1 columna (los <ul> por columna desaparecen y manda `order`)
+  // Rejilla: 2 columnas; los <ul> por columna desaparecen y manda `order`
   &__grid {
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
-    margin-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px 16px;
+    margin-top: 40px;
   }
 
   &__col {
@@ -72,36 +72,40 @@ $work-3col: 1280px;
   }
 
   &__case {
-    width: min(var(--case-w), 100%);
-    // Escalera: desplazamiento según la x del rectángulo en el XD
-    margin-left: max(0px, calc((100% - var(--case-w)) * var(--x) / 1920));
+    min-width: 0;
   }
 
-  // Caso: siempre las medidas del XD
+  // Columna derecha algo más abajo (asimetría); no afecta al flujo
+  &__case--even {
+    position: relative;
+    top: 56px;
+  }
+
+  // Caso compacto: rectángulo y textos más pequeños
   &__swatch {
     display: block;
-    width: 97px;
-    height: 122px;
-    margin: 0 auto 61px;
+    width: 48px;
+    height: 60px;
+    margin: 0 auto 24px;
   }
 
   &__name {
-    font-size: 28px;
-    line-height: 1;
+    font-size: 16px;
+    line-height: 1.15;
     text-transform: uppercase;
   }
 
   &__claim {
-    margin-top: 8px;
-    font-size: 18px;
-    line-height: 26px;
+    margin-top: 6px;
+    font-size: 11px;
+    line-height: 1.4;
     text-transform: uppercase;
   }
 
   &__text {
-    margin-top: 26px;
-    font-size: 16px;
-    line-height: 26px;
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.5;
   }
 
   @include mq-wide {
@@ -114,14 +118,50 @@ $work-3col: 1280px;
   // 2 columnas
   // -------------------------------------------------------------------------
   @media (min-width: $work-2col) {
+    --case-w: 372px;
+
     &__canvas {
       padding: 64px 48px 220px;
     }
 
+    &__title {
+      font-size: 36px;
+    }
+
+    &__subtitle {
+      font-size: 18px;
+    }
+
     &__grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
       gap: 96px 48px;
+      margin-top: 64px;
+    }
+
+    &__case {
+      width: min(var(--case-w), 100%);
+    }
+
+    &__swatch {
+      width: 97px;
+      height: 122px;
+      margin-bottom: 61px;
+    }
+
+    &__name {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    &__claim {
+      margin-top: 8px;
+      font-size: 18px;
+      line-height: 26px;
+    }
+
+    &__text {
+      margin-top: 26px;
+      font-size: 16px;
+      line-height: 26px;
     }
 
     // Desplazamiento horizontal del XD dentro de la columna, sin salirse
@@ -131,7 +171,6 @@ $work-3col: 1280px;
 
     // Columna derecha más abajo (asimetría); no afecta al flujo de la izquierda
     &__case--even {
-      position: relative;
       top: 140px;
     }
   }

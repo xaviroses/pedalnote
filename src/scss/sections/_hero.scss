@@ -144,15 +144,15 @@
       margin: 0;
       padding: 0;
       // Escala con el ancho, igual que la foto: así nunca invade la mitad B/N
-      // (89 px a 1920 con Inter = 1132 px, como en el XD; recalcular con Suisse).
-      font-size: max(#{dpx(89)}, 2.25rem);
+      // (90 px a 1920 con Suisse Intl = 1132 px, como en el XD).
+      font-size: max(#{dpx(90)}, 2.25rem);
       line-height: 1;
     }
 
     &__tagline {
       display: block;
       position: absolute;
-      top: calc(max(#{dpx(89)}, 2.25rem) + #{dpx(17)}); // 106 px a 1920, como en el XD
+      top: calc(max(#{dpx(90)}, 2.25rem) + #{dpx(17)}); // 106 px a 1920, como en el XD
       left: max(#{dpx(34)}, 1rem);
       font-size: max(#{dpx(14)}, 0.75rem);
     }

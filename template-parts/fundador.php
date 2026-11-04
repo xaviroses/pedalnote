@@ -9,7 +9,7 @@
 	<div class="founder__media parallax" aria-hidden="true">
 		<div class="parallax__layer" data-parallax>
 			<?php
-			echo pedalnote_picture( 'fundador', '', '(max-width: 1023px) and (orientation: portrait) 190vw, (max-width: 767px) 190vw, 100vw' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo pedalnote_picture( 'fundador', '', '(max-width: 1023px) and (orientation: portrait) 360vw, (max-width: 767px) 360vw, 100vw' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>
 		</div>
 	</div>

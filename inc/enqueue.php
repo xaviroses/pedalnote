@@ -45,6 +45,6 @@ add_action( 'wp_enqueue_scripts', function () {
 add_action( 'wp_head', function () {
 	printf(
 		'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
-		esc_url( PEDALNOTE_URI . '/assets/fonts/inter-400-latin.woff2' )
+		esc_url( PEDALNOTE_URI . '/assets/fonts/' . ( file_exists( PEDALNOTE_DIR . '/assets/fonts/suisse-intl-book.woff2' ) ? 'suisse-intl-book.woff2' : 'inter-400-latin.woff2' ) )
 	);
 }, 1 );

@@ -14,8 +14,8 @@
   --color-yellow: #ffcf02;
   --color-green: #2dab66;
 
-  // Tipografía: todo el sitio en un solo peso (Suisse Intl Book en el XD).
-  --font-base: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  // Tipografía: todo el sitio en un solo peso, Suisse Intl Book (XD); Inter de respaldo.
+  --font-base: 'Suisse Intl', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-weight: 400;
 
   // Escala fluida: móvil (375) → valor exacto del XD (1920)
@@ -26,7 +26,7 @@
   --fs-28: #{fluid(20, 28)};
   --fs-36: #{fluid(24, 36)};
   --fs-38: #{fluid(24, 38)};
-  --fs-display: #{fluid(34, 89)}; // titular: 89 px con Inter = 1132 px de ancho, como en el XD (recalcular con Suisse)
+  --fs-display: #{fluid(34, 90)}; // titular: 90 px con Suisse Intl = 1132 px de ancho, como en el XD
 
   // Interlineados (XD: 38 px / 49 px ≈ 1.29)
   --lh-tight: 1.1;

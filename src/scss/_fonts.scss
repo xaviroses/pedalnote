@@ -1,6 +1,15 @@
-// Fuente provisional: Inter 400 (OFL), servida desde el tema.
-// Al llegar la licencia de Suisse Intl Book: añadir aquí su @font-face
-// y cambiar --font-base en _tokens.scss. Nada más.
+// Suisse Intl Book (la del XD). El archivo NO está en el repo (fuente comercial):
+// assets/fonts/suisse-intl-book.woff2 se copia aparte en cada entorno con licencia.
+// Si no está, el navegador usa Inter (respaldo, OFL, sí versionada).
+@font-face {
+  font-family: 'Suisse Intl';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/suisse-intl-book.woff2') format('woff2');
+}
+
+// Respaldo: Inter 400 (OFL), servida desde el tema.
 @font-face {
   font-family: 'Inter';
   font-style: normal;
