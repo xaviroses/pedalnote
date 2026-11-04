@@ -7,12 +7,13 @@
 //   nombre 28 px, claim 18 px, texto 16 px, 26 px entre líneas (XD).
 // Disposición:
 //   < 900 px      → 1 columna, orden de lectura del XD, escalera según la x del XD
-//   900–1365 px   → 2 columnas, la derecha desplazada hacia abajo
-//   ≥ 1366 px     → 3 columnas con 2 casos cada una; a 1920 replica el XD
+//   900–1279 px   → 2 columnas, la derecha desplazada hacia abajo (tamaños fijos)
+//   ≥ 1280 px     → 3 columnas: todo escala en proporción al XD (--s = 1 px del XD),
+//                   como el diseño visto a ese ancho; a 1920 replica el XD
 // ---------------------------------------------------------------------------
 
 $work-2col: 900px;
-$work-3col: 1366px;
+$work-3col: 1280px;
 
 .work {
   --u: min(calc(100vw / 393), 1.6px);
@@ -136,9 +137,13 @@ $work-3col: 1366px;
   }
 
   // -------------------------------------------------------------------------
-  // 3 columnas (escritorio): base del XD a 118 px y huecos verticales del XD
+  // 3 columnas (escritorio): todo en proporción al XD con --s (1 px del XD).
+  // Los casos siguen en flujo, así que aunque un texto crezca no se solapan.
   // -------------------------------------------------------------------------
   @media (min-width: $work-3col) {
+    --s: calc(100vw / 1920);
+    --case-w: calc(372 * var(--s));
+
     &__media {
       position: absolute;
       inset: 0;
@@ -147,13 +152,22 @@ $work-3col: 1366px;
     }
 
     &__canvas {
-      padding: 118px #{dpx(93)} 66px #{dpx(117)};
+      padding: calc(118 * var(--s)) calc(93 * var(--s)) calc(66 * var(--s)) calc(117 * var(--s));
     }
 
     &__header {
       position: absolute;
-      top: 49px;
-      left: dpx(117);
+      top: calc(49 * var(--s));
+      left: calc(117 * var(--s));
+    }
+
+    &__title {
+      font-size: max(calc(36 * var(--s)), 1.375rem);
+    }
+
+    &__subtitle {
+      margin-top: calc(4 * var(--s));
+      font-size: max(calc(18 * var(--s)), 0.75rem);
     }
 
     &__grid {
@@ -173,13 +187,39 @@ $work-3col: 1366px;
       position: static;
     }
 
+    &__swatch {
+      width: calc(97 * var(--s));
+      height: calc(122 * var(--s));
+      margin-bottom: calc(61 * var(--s));
+    }
+
+    &__name {
+      font-size: max(calc(28 * var(--s)), 1rem);
+    }
+
+    &__claim {
+      margin-top: calc(8 * var(--s));
+      font-size: max(calc(18 * var(--s)), 0.75rem);
+      line-height: 1.4444; // 26 / 18
+    }
+
+    &__text {
+      margin-top: calc(26 * var(--s));
+      font-size: max(calc(16 * var(--s)), 0.75rem);
+      line-height: 1.625; // 26 / 16
+    }
+
+    &__case {
+      margin-left: max(0px, min(calc(var(--dx) * var(--s)), calc(100% - var(--case-w))));
+    }
+
     // Primer caso de cada columna: distancia desde la base; segundo: desde el anterior
     &__case:first-child {
-      padding-top: var(--mt);
+      padding-top: calc(var(--mt) * var(--s));
     }
 
     &__case + &__case {
-      margin-top: var(--mt);
+      margin-top: calc(var(--mt) * var(--s));
     }
   }
 }

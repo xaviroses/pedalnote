@@ -110,7 +110,7 @@ foreach ( $pedalnote_cases as $pedalnote_case ) {
 			<?php foreach ( $pedalnote_cols as $pedalnote_col ) : ?>
 				<ul class="work__col" role="list">
 					<?php foreach ( $pedalnote_col as $pedalnote_case ) : ?>
-						<li class="work__case<?php echo 0 === $pedalnote_case['order'] % 2 ? ' work__case--even' : ''; ?>" style="<?php echo esc_attr( sprintf( '--dx:%d;--mt:%dpx;--x:%d;order:%d', $pedalnote_case['dx'], $pedalnote_case['mt'], $pedalnote_case['x'], $pedalnote_case['order'] ) ); ?>">
+						<li class="work__case<?php echo 0 === $pedalnote_case['order'] % 2 ? ' work__case--even' : ''; ?>" style="<?php echo esc_attr( sprintf( '--dx:%d;--mt:%d;--x:%d;order:%d', $pedalnote_case['dx'], $pedalnote_case['mt'], $pedalnote_case['x'], $pedalnote_case['order'] ) ); ?>">
 							<span class="work__swatch" style="background:var(--color-<?php echo esc_attr( $pedalnote_case['color'] ); ?>)" aria-hidden="true"></span>
 							<h3 class="work__name"><?php echo esc_html( $pedalnote_case['name'] ); ?></h3>
 							<p class="work__claim"><?php echo esc_html( $pedalnote_case['claim'] ); ?></p>
