@@ -103,9 +103,9 @@
 
   // Rótulo vertical (INNOVATION): abajo a la derecha, sale por debajo de la sección
   &--vertical {
-    right: mpx(18);
-    bottom: calc(-1 * #{mpx(140)});
-    width: mpx(44);
+    right: mpx(8);
+    bottom: calc(-1 * #{mpx(150)});
+    width: mpx(60);
   }
 }
 
