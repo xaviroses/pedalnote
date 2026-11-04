@@ -1,0 +1,21 @@
+{
+  "name": "pedalnote",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tema WordPress one page para Pedal Note",
+  "scripts": {
+    "dev": "npm run dev:css & npm run dev:js & wait",
+    "dev:css": "sass --watch --embed-source-map src/scss/main.scss assets/css/main.css",
+    "dev:js": "esbuild src/js/main.js --bundle --sourcemap=inline --target=es2018 --outfile=assets/js/main.js --watch=forever",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "sass --no-source-map --style=compressed src/scss/main.scss assets/css/main.css",
+    "build:js": "esbuild src/js/main.js --bundle --minify --target=es2018 --outfile=assets/js/main.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "sass": "^1.107.1"
+  },
+  "dependencies": {
+    "gsap": "^3.15.1"
+  }
+}

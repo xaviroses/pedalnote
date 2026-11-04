@@ -1,0 +1,10 @@
+// Tokens de diseño (colores, tipografía, escala fluida).
+// Se completan en el paso «Tokens» con los valores del XD.
+:root {
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-grey: #777777;
+
+  // Fuente provisional: Inter, hasta tener licencia web de Suisse Intl.
+  --font-base: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
