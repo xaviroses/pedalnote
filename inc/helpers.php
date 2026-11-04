@@ -102,7 +102,8 @@ function pedalnote_xy( int $x, int $y ): string {
  *
  * @param array $steps Lista de pasos, en orden de lectura (de arriba abajo):
  *                     [ 'label' => string, 'x' => int, 'y' => int, 'side' => 'right'|'left' ].
- *                     x/y = esquina superior izquierda de la barra en el XD; side = lado de la etiqueta.
+ *                     x/y = esquina superior izquierda de la barra en el XD; side = lado de la etiqueta;
+ *                     long = true para frases largas (en móvil, sin sangría y con salto de línea).
  */
 function pedalnote_diagram( array $steps ): string {
 	$items = '';
@@ -110,7 +111,7 @@ function pedalnote_diagram( array $steps ): string {
 		$left   = 'left' === ( $step['side'] ?? 'right' );
 		$items .= sprintf(
 			'<li class="diagram__step%s"%s><span class="diagram__bar" aria-hidden="true"></span><span class="diagram__label">%s</span></li>',
-			$left ? ' diagram__step--label-left' : '',
+			( $left ? ' diagram__step--label-left' : '' ) . ( empty( $step['long'] ) ? '' : ' diagram__step--long' ),
 			pedalnote_xy( $step['x'], $step['y'] ),
 			esc_html( $step['label'] )
 		);

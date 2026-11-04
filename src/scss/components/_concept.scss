@@ -13,6 +13,8 @@
 .concept {
   --u: min(calc(100vw / 393), 1.6px);
   --concept-height: 806; // alto de la sección en el XD
+  --gap: 7; // separación barra–etiqueta en el XD (px)
+  --lead-gap: 7; // separación barra–frase guía
   position: relative;
   z-index: 2; // el rótulo se sale por debajo, encima de la foto siguiente
   color: var(--color-black);
@@ -57,8 +59,15 @@
     gap: 0.5em;
     align-items: center;
     // Escalera: sangría proporcional a la posición x del XD (268–1462 px)
-    margin: 1rem 0 0 calc((100% - 12rem) * (var(--x) - 268) / 1194);
+    margin: 1rem 0 0 calc((100% - 12rem) * clamp(0, (var(--x) - 268) / 1194, 1));
     white-space: nowrap;
+  }
+
+  // Frases largas: en móvil, sin sangría y con salto de línea; la barra al final
+  &__step--long {
+    align-items: flex-end;
+    margin-left: 0;
+    white-space: normal;
   }
 
   // Etiqueta delante de la barra, como en el XD
@@ -84,11 +93,49 @@
     height: auto;
   }
 
+  // Rótulo horizontal (TRANSFORMATION): en móvil, arriba, en el flujo
+  &--horizontal {
+    position: relative;
+    display: block;
+    width: mpx(240);
+    margin-bottom: 1.75rem;
+  }
+
   // Rótulo vertical (INNOVATION): abajo a la derecha, sale por debajo de la sección
   &--vertical {
     right: mpx(18);
     bottom: calc(-1 * #{mpx(140)});
     width: mpx(44);
+  }
+}
+
+// Cinco cuadraditos con los colores de Selected Work (final de la sección 5)
+.swatches {
+  display: flex;
+  gap: 0.25rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+
+  span {
+    width: 0.875rem;
+    height: 1.125rem;
+  }
+}
+
+// Transformation: etiqueta lateral a la derecha (espejo de Innovation)
+.concept--transformation {
+  --concept-height: 895;
+  --gap: 13;
+  --lead-gap: 17;
+
+  .concept__canvas {
+    padding-right: mpx(80);
+    padding-left: mpx(26);
+  }
+
+  .side-label {
+    right: mpx(22);
+    left: auto;
   }
 }
 
@@ -106,7 +153,7 @@
       position: absolute;
       left: cpx(var(--x));
       top: cpx(var(--y));
-      gap: cpx(7);
+      gap: cpx(var(--lead-gap));
       align-items: center;
       font-size: max(#{cpx(18)}, 0.75rem);
       white-space: nowrap;
@@ -126,7 +173,8 @@
       // --y es el borde superior de la barra: se compensa la altura de línea de la etiqueta
       top: calc(#{cpx(var(--y))} - (1.2em - #{cpx(14)}) / 2);
       left: cpx(var(--x));
-      gap: cpx(7);
+      gap: cpx(var(--gap));
+      align-items: center;
       margin: 0;
       white-space: nowrap;
     }
@@ -151,6 +199,36 @@
       right: auto;
       bottom: auto;
       width: cpx(114);
+    }
+
+    &--horizontal {
+      position: absolute;
+      width: cpx(598);
+      margin: 0;
+    }
+  }
+
+  .swatches {
+    position: absolute;
+    top: cpx(var(--y));
+    left: cpx(var(--x));
+    gap: cpx(1.6);
+    margin: 0;
+
+    span {
+      width: cpx(17.5);
+      height: cpx(22);
+    }
+  }
+
+  .concept--transformation {
+    .concept__canvas {
+      padding: 0;
+    }
+
+    .side-label {
+      right: auto;
+      left: cpx(var(--x));
     }
   }
 }

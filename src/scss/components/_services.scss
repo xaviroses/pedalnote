@@ -41,6 +41,27 @@
     top: mpx(250);
   }
 
+  &__col--side {
+    margin-top: 1.75rem;
+
+    .services__list {
+      margin-top: 0;
+    }
+  }
+
+  // Sección 6: etiqueta lateral a la derecha
+  &--transformation {
+    .services__canvas {
+      padding-right: mpx(80);
+      padding-left: mpx(26);
+    }
+
+    .side-label {
+      right: mpx(22);
+      left: auto;
+    }
+  }
+
   &__title {
     font-size: var(--fs-24);
     line-height: var(--lh-heading);
@@ -85,6 +106,18 @@
       top: cpx(var(--y)); // anula el ajuste de móvil
     }
 
+    &--transformation {
+      .services__canvas {
+        padding-right: 0;
+        padding-left: 0;
+      }
+
+      .side-label {
+        right: auto;
+        left: cpx(var(--x));
+      }
+    }
+
     &__canvas {
       min-height: inherit;
       padding: 0 0 cpx(63);
@@ -96,6 +129,19 @@
       margin-left: cpx(var(--x));
       padding-top: cpx(var(--y));
       max-width: cpx(var(--w, 729));
+    }
+
+    // Segunda columna (sección 6): fuera del flujo, en su posición del XD
+    &__col--side {
+      position: absolute;
+      top: 0;
+      left: cpx(var(--x));
+      margin: 0;
+      max-width: cpx(var(--w, 528));
+
+      .services__list {
+        margin-top: 0; // sin título encima
+      }
     }
 
     &__title {
