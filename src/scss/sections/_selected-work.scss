@@ -2,24 +2,36 @@
 
 // ---------------------------------------------------------------------------
 // Selected Work
-// Escritorio (XD, 1920 × 1199): cada caso en su posición; el rectángulo de color
-// (97 × 122) centrado sobre un texto de 372 px, 61 px por encima.
-// Nombre 28 px, claim 18 px, texto 16 px, con 26 px entre líneas.
-// Móvil (sin diseño): columna, con el rectángulo desplazado según su x del XD
-// para conservar la asimetría.
+// Los casos fluyen (nunca se solapan). Siempre, en cualquier pantalla:
+//   rectángulo 97 × 122 centrado 61 px sobre un texto de máx. 372 px;
+//   nombre 28 px, claim 18 px, texto 16 px, 26 px entre líneas (XD).
+// Disposición:
+//   < 900 px      → 1 columna, orden de lectura del XD, escalera según la x del XD
+//   900–1365 px   → 2 columnas, la derecha desplazada hacia abajo
+//   ≥ 1366 px     → 3 columnas con 2 casos cada una; a 1920 replica el XD
 // ---------------------------------------------------------------------------
+
+$work-2col: 900px;
+$work-3col: 1366px;
 
 .work {
   --u: min(calc(100vw / 393), 1.6px);
+  --case-w: 372px;
   position: relative;
   color: var(--color-white);
   background: #6b7680;
 
+  // Por debajo de 3 columnas la sección es muy alta: la foto se queda fija al
+  // tamaño de la pantalla (sticky) y los casos pasan por encima, así no se amplía.
   &__media {
-    position: absolute;
-    inset: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    margin-bottom: -100vh;
+    margin-bottom: -100svh;
 
-    // Móvil: velo para leer el texto blanco sobre el fondo claro
+    // Móvil y tableta vertical: velo para leer el texto blanco sobre el fondo claro
     &::after {
       content: '';
       position: absolute;
@@ -29,118 +41,145 @@
   }
 
   &__canvas {
-    padding: mpx(64) mpx(26) mpx(72);
-  }
-
-  &__header,
-  &__list {
     position: relative;
+    padding: 64px 24px 80px;
   }
 
+  // Cabecera
   &__title {
-    font-size: var(--fs-36);
+    font-size: 36px;
     line-height: 1;
     text-transform: uppercase;
   }
 
   &__subtitle {
-    margin-top: 0.5em;
-    font-size: var(--fs-16);
+    margin-top: 4px;
+    font-size: 18px;
     text-transform: uppercase;
   }
 
-  &__case {
-    margin-top: 3rem;
+  // Rejilla: 1 columna (los <ul> por columna desaparecen y manda `order`)
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    margin-top: 64px;
   }
 
+  &__col {
+    display: contents;
+  }
+
+  &__case {
+    width: min(var(--case-w), 100%);
+    // Escalera: desplazamiento según la x del rectángulo en el XD
+    margin-left: max(0px, calc((100% - var(--case-w)) * var(--x) / 1920));
+  }
+
+  // Caso: siempre las medidas del XD
   &__swatch {
     display: block;
-    width: 3rem;
-    height: 3.75rem;
-    margin: 0 0 1.25rem calc((100% - 3rem) * var(--x) / 1920);
+    width: 97px;
+    height: 122px;
+    margin: 0 auto 61px;
   }
 
   &__name {
-    font-size: var(--fs-24);
-    line-height: 1.15;
+    font-size: 28px;
+    line-height: 1;
     text-transform: uppercase;
   }
 
   &__claim {
-    margin-top: 0.35em;
-    font-size: var(--fs-16);
-    line-height: 1.4;
+    margin-top: 8px;
+    font-size: 18px;
+    line-height: 26px;
     text-transform: uppercase;
   }
 
   &__text {
-    margin-top: 1em;
-    font-size: var(--fs-16);
-    line-height: 1.55;
+    margin-top: 26px;
+    font-size: 16px;
+    line-height: 26px;
   }
 
-  // -------------------------------------------------------------------------
-  // Escritorio
-  // -------------------------------------------------------------------------
   @include mq-wide {
     &__media::after {
       content: none;
     }
+  }
+
+  // -------------------------------------------------------------------------
+  // 2 columnas
+  // -------------------------------------------------------------------------
+  @media (min-width: $work-2col) {
+    &__canvas {
+      padding: 64px 48px 220px;
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px 48px;
+    }
+
+    // Desplazamiento horizontal del XD dentro de la columna, sin salirse
+    &__case {
+      margin-left: max(0px, min(calc(var(--dx) * 100vw / 1920), calc(100% - var(--case-w))));
+    }
+
+    // Columna derecha más abajo (asimetría); no afecta al flujo de la izquierda
+    &__case--even {
+      position: relative;
+      top: 140px;
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 3 columnas (escritorio): base del XD a 118 px y huecos verticales del XD
+  // -------------------------------------------------------------------------
+  @media (min-width: $work-3col) {
+    &__media {
+      position: absolute;
+      inset: 0;
+      height: auto;
+      margin-bottom: 0;
+    }
 
     &__canvas {
-      aspect-ratio: 1920 / 1199;
-      padding: 0;
+      padding: 118px #{dpx(93)} 66px #{dpx(117)};
     }
 
     &__header {
       position: absolute;
-      top: cpx(var(--y));
-      left: cpx(var(--x));
+      top: 49px;
+      left: dpx(117);
     }
 
-    &__title {
-      font-size: max(#{cpx(36)}, 1.375rem);
+    &__grid {
+      display: flex;
+      flex-direction: row;
+      gap: 0;
+      margin-top: 0;
     }
 
-    &__subtitle {
-      margin-top: cpx(4);
-      font-size: max(#{cpx(18)}, 0.75rem);
+    &__col {
+      display: block;
+      flex: 1 1 0;
+      min-width: 0;
     }
 
-    &__list {
+    &__case--even {
       position: static;
     }
 
-    // El caso se ancla por su rectángulo: x − 137 (centrado sobre 372 px)
-    &__case {
-      position: absolute;
-      top: cpx(var(--y));
-      left: cpx(calc(var(--x) - 137));
-      width: cpx(372);
-      margin: 0;
+    // Primer caso de cada columna: distancia desde la base; segundo: desde el anterior
+    &__case:first-child {
+      padding-top: var(--mt);
     }
 
-    &__swatch {
-      width: cpx(97);
-      height: cpx(122);
-      margin: 0 auto cpx(61);
-    }
-
-    &__name {
-      font-size: max(#{cpx(28)}, 1rem);
-      line-height: 1;
-    }
-
-    &__claim {
-      margin-top: cpx(8);
-      font-size: max(#{cpx(18)}, 0.75rem);
-      line-height: 1.4444; // 26 / 18
-    }
-
-    &__text {
-      margin-top: cpx(26);
-      font-size: max(#{cpx(16)}, 0.75rem);
-      line-height: 1.625; // 26 / 16
+    &__case + &__case {
+      margin-top: var(--mt);
     }
   }
 }

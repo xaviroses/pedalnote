@@ -28,17 +28,26 @@
   color: var(--color-black);
   background: var(--color-white);
 
+  // Móvil: la foto cubre toda la sección, encuadrada en su zona clara y cálida
+  // (como en escritorio, el texto negro va sobre la parte clara)
   &__media {
-    position: relative;
-    height: mpx(300);
+    position: absolute;
+    inset: 0;
 
     img {
-      object-position: 72% 50%;
+      object-position: 8% 50%;
     }
   }
 
   &__canvas {
-    padding: mpx(40) mpx(26) mpx(56) mpx(80);
+    position: relative;
+    padding: 72px 24px 80px;
+  }
+
+  // Bloque centrado, texto alineado a la izquierda
+  &__bio {
+    max-width: 34rem;
+    margin: 0 auto;
   }
 
   &__bio {
