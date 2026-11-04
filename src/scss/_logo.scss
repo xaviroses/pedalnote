@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------------------
 // Sello flotante «PEDALNOTE»
 // Escritorio (XD 1920 × 1080): 292 × 60 px, centrado en la pantalla.
-// Móvil (XD 393): arriba, centrado (y = 76, ~167 px de ancho).
+// Móvil y tableta vertical (XD 393): arriba, centrado, 167 px de ancho fijos.
 // Siempre como en el XD: caja blanca con las letras caladas (sin cambio de color).
 // ---------------------------------------------------------------------------
 
@@ -11,9 +11,9 @@
   --u: min(calc(100vw / 393), 1.6px);
   position: fixed;
   z-index: 100;
-  top: mpx(76);
+  top: 76px; // fijo, como el XD móvil (no crece en pantallas más anchas)
   left: 50%;
-  width: mpx(167);
+  width: 167px;
   color: var(--color-white);
   transform: translateX(-50%);
 
