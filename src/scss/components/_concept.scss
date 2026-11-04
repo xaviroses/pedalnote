@@ -134,14 +134,21 @@
   --gap: 13;
   --lead-gap: 17;
 
+  // Móvil: el rótulo va arriba y los cuadraditos abajo, así que el lienzo
+  // lleva poco margen; entre elementos, las mismas distancias que Innovation.
   .concept__canvas {
-    padding-right: mpx(80);
-    padding-left: mpx(26);
+    padding: mpx(48) mpx(80) mpx(56) mpx(26);
   }
 
   .side-label {
+    top: mpx(48);
     right: mpx(22);
+    bottom: mpx(56);
     left: auto;
+  }
+
+  .lettering--horizontal {
+    margin-bottom: 3.5rem;
   }
 }
 
