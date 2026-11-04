@@ -1,7 +1,7 @@
 <?php
 /**
  * Sello «PEDALNOTE» fijo en pantalla (SVG del XD: rectángulo con las letras caladas).
- * Cambia de color según el fondo con mix-blend-mode: difference (ver _logo.scss).
+ * Siempre blanco, como en el XD (decisión del diseño: no cambia de color con el fondo).
  *
  * @package pedalnote
  */

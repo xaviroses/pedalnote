@@ -4,8 +4,7 @@
 // Sello flotante «PEDALNOTE»
 // Escritorio (XD 1920 × 1080): 292 × 60 px, centrado en la pantalla.
 // Móvil (XD 393): arriba, centrado (y = 76, ~167 px de ancho).
-// Blanco con mix-blend-mode: difference → negro sobre fondos blancos y en
-// negativo sobre las fotos, siempre visible.
+// Siempre como en el XD: caja blanca con las letras caladas (sin cambio de color).
 // ---------------------------------------------------------------------------
 
 .seal {
@@ -17,7 +16,6 @@
   width: mpx(167);
   color: var(--color-white);
   transform: translateX(-50%);
-  mix-blend-mode: difference;
 
   &__svg {
     width: 100%;
