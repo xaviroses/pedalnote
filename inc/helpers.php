@@ -86,3 +86,56 @@ function pedalnote_picture( string $name, string $alt = '', string $sizes = '100
 		$img
 	);
 }
+
+/**
+ * Atributo style con la posición de un elemento en el lienzo del XD (escritorio, 1920 px).
+ *
+ * @param int $x Izquierda en px del XD (relativa a la sección).
+ * @param int $y Arriba en px del XD (relativa a la sección).
+ */
+function pedalnote_xy( int $x, int $y ): string {
+	return sprintf( ' style="--x:%d;--y:%d"', $x, $y );
+}
+
+/**
+ * Diagrama de barras escalonadas (secciones Innovation y Transformation).
+ *
+ * @param array $steps Lista de pasos, en orden de lectura (de arriba abajo):
+ *                     [ 'label' => string, 'x' => int, 'y' => int, 'side' => 'right'|'left' ].
+ *                     x/y = esquina superior izquierda de la barra en el XD; side = lado de la etiqueta.
+ */
+function pedalnote_diagram( array $steps ): string {
+	$items = '';
+	foreach ( $steps as $step ) {
+		$left   = 'left' === ( $step['side'] ?? 'right' );
+		$items .= sprintf(
+			'<li class="diagram__step%s"%s><span class="diagram__bar" aria-hidden="true"></span><span class="diagram__label">%s</span></li>',
+			$left ? ' diagram__step--label-left' : '',
+			pedalnote_xy( $step['x'], $step['y'] ),
+			esc_html( $step['label'] )
+		);
+	}
+	return '<ol class="diagram">' . $items . '</ol>';
+}
+
+/**
+ * Rótulo manuscrito (WebP con PNG de respaldo). Decorativo: el título real va en el <h2>.
+ *
+ * @param string $name Nombre en assets/img (rotulo-innovation…).
+ * @param int    $w    Ancho en px del XD (1x).
+ * @param int    $h    Alto en px del XD (1x).
+ * @param string $class Clases extra.
+ * @param int    $x    Posición en el XD.
+ * @param int    $y    Posición en el XD.
+ */
+function pedalnote_lettering( string $name, int $w, int $h, string $class, int $x, int $y ): string {
+	$base = PEDALNOTE_URI . '/assets/img/' . $name;
+	return sprintf(
+		'<picture class="lettering %1$s"%2$s aria-hidden="true"><source type="image/webp" srcset="%3$s.webp"><img src="%3$s.png" width="%4$d" height="%5$d" alt="" loading="lazy" decoding="async"></picture>',
+		esc_attr( $class ),
+		pedalnote_xy( $x, $y ),
+		esc_url( $base ),
+		$w,
+		$h
+	);
+}

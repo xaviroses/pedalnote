@@ -3,7 +3,9 @@
 @use 'tokens';
 @use 'base';
 @use 'parallax';
+@use 'components/concept';
 
 // Secciones, en el orden de la página
 @use 'sections/hero';
 @use 'sections/claves';
+// 3 y 5 (Innovation / Transformation) usan components/concept

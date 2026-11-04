@@ -1,0 +1,214 @@
+@use '../functions' as *;
+
+// ---------------------------------------------------------------------------
+// Bloque «concepto» (secciones 3 Innovation y 5 Transformation):
+// etiqueta lateral vertical + frase guía + diagrama de barras + rótulo manuscrito.
+//
+// Escritorio (mq-wide): lienzo con la proporción del XD (1920 × alto de la sección)
+// y cada pieza colocada en sus coordenadas del XD (--x / --y), escaladas con cqw.
+// Móvil y tableta vertical (sin diseño en el XD): columna con el diagrama como
+// lista escalonada que conserva el efecto de escalera.
+// ---------------------------------------------------------------------------
+
+// px del XD de escritorio → unidades del contenedor (1920 px = 100cqw)
+@function cpx($px) {
+  @return calc(#{$px} * 100cqw / 1920);
+}
+
+.concept {
+  --u: min(calc(100vw / 393), 1.6px);
+  --concept-height: 806; // alto de la sección en el XD
+  position: relative;
+  z-index: 2; // el rótulo se sale por debajo, encima de la foto siguiente
+  color: var(--color-black);
+  background: var(--color-white);
+
+  &__canvas {
+    position: relative;
+    padding: mpx(64) mpx(26) mpx(72) mpx(80);
+  }
+
+  // Frase guía: barra + «From … to …»
+  &__lead {
+    display: flex;
+    gap: 0.6em;
+    align-items: baseline;
+    font-size: var(--fs-16);
+    line-height: var(--lh-heading);
+    color: var(--color-grey);
+
+    .diagram__bar {
+      flex: none;
+      transform: translateY(-0.15em);
+    }
+
+    strong {
+      font-weight: inherit;
+      color: var(--color-black);
+    }
+  }
+}
+
+// Etiqueta lateral: INNOVATION / línea / DEFINING TOMORROW, leída de abajo arriba
+.side-label {
+  position: absolute;
+  top: mpx(64);
+  bottom: mpx(72);
+  left: mpx(22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  width: 1.5rem;
+
+  &__kicker,
+  &__title {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+  }
+
+  &__kicker {
+    font-size: 0.6875rem;
+  }
+
+  &__title {
+    font-size: 0.8125rem;
+  }
+
+  &__line {
+    flex: 1;
+    align-self: flex-end;
+    width: 1px;
+    background: currentColor;
+  }
+}
+
+// Diagrama de barras escalonadas
+.diagram {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+  line-height: 1.2;
+
+  &__step {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    // Escalera: sangría proporcional a la posición x del XD (268–1462 px)
+    margin: 1rem 0 0 calc((100% - 12rem) * (var(--x) - 268) / 1194);
+    white-space: nowrap;
+  }
+
+  // Etiqueta delante de la barra, como en el XD
+  &__step--label-left .diagram__label {
+    order: -1;
+  }
+
+  &__bar {
+    display: block;
+    flex: none;
+    width: 3.5rem;
+    height: 0.4rem;
+    background: var(--color-black);
+  }
+}
+
+.lettering {
+  position: absolute;
+  z-index: 1;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  // Rótulo vertical (INNOVATION): abajo a la derecha, sale por debajo de la sección
+  &--vertical {
+    right: mpx(14);
+    bottom: calc(-1 * #{mpx(150)});
+    width: mpx(50);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Escritorio: composición del XD
+// ---------------------------------------------------------------------------
+@include mq-wide {
+  .concept {
+    &__canvas {
+      container-type: inline-size;
+      aspect-ratio: 1920 / var(--concept-height);
+      padding: 0;
+    }
+
+    &__lead {
+      position: absolute;
+      left: cpx(var(--x));
+      top: cpx(var(--y));
+      gap: cpx(7);
+      align-items: center;
+      font-size: max(#{cpx(18)}, 0.75rem);
+      white-space: nowrap;
+
+      .diagram__bar {
+        transform: none;
+      }
+    }
+  }
+
+  .side-label {
+    top: cpx(var(--y));
+    bottom: auto;
+    left: cpx(var(--x));
+    gap: cpx(11);
+    width: cpx(32);
+    height: cpx(639);
+
+    &__kicker {
+      font-size: max(#{cpx(18)}, 0.625rem);
+    }
+
+    &__title {
+      font-size: max(#{cpx(24)}, 0.75rem);
+    }
+  }
+
+  .diagram {
+    margin: 0;
+    font-size: max(#{cpx(18)}, 0.75rem);
+
+    &__step {
+      position: absolute;
+      // --y es el borde superior de la barra: se compensa la altura de línea de la etiqueta
+      top: calc(#{cpx(var(--y))} - (1.2em - #{cpx(14)}) / 2);
+      left: cpx(var(--x));
+      gap: cpx(7);
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    // Etiqueta a la izquierda: se ancla por el borde derecho de la barra
+    &__step--label-left {
+      left: auto;
+      right: cpx(calc(1920 - var(--x) - 122));
+    }
+
+    &__bar {
+      width: cpx(122);
+      height: cpx(14);
+    }
+  }
+
+  .lettering {
+    top: cpx(var(--y));
+    left: cpx(var(--x));
+
+    &--vertical {
+      right: auto;
+      bottom: auto;
+      width: cpx(114);
+    }
+  }
+}
