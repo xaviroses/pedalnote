@@ -2,4 +2,6 @@
 @use 'fonts';
 @use 'tokens';
 @use 'base';
-// Secciones (se irán añadiendo): @use 'sections/hero'; ...
+
+// Secciones, en el orden de la página
+@use 'sections/hero';

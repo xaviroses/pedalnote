@@ -1,4 +1,5 @@
-@use 'sass:math';
+@use "sass:math";
+@use "sass:map";
 
 // Viewports de referencia: móvil y artboard de escritorio del XD.
 $vw-min: 375;
@@ -13,4 +14,35 @@ $vw-max: 1920;
   $slope: math.div($max - $min, $to - $from);
   $intercept: $min - $slope * $from;
   @return clamp(#{rem($min)}, #{rem($intercept)} + #{$slope * 100}vw, #{rem($max)});
+}
+
+// Puntos de corte (mobile first): @include mq(md) { ... }
+$breakpoints: (
+  md: 768px,
+  lg: 1024px,
+  xl: 1440px,
+);
+
+// Composición de escritorio del hero y similares: pantallas anchas o tabletas en horizontal.
+@mixin mq-wide {
+  @media (min-width: 1024px), (min-width: 768px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin mq($bp) {
+  @media (min-width: map.get($breakpoints, $bp)) {
+    @content;
+  }
+}
+
+// Unidad «píxel del XD» escalada al ancho de pantalla.
+// Móvil: artboard de 393 px → mpx(80) = 80 × var(--u), donde --u = 100vw / 393
+// (con tope, para que en tabletas verticales no crezca sin límite). Escritorio: 1920 → dpx(34).
+@function mpx($px) {
+  @return calc(#{$px} * var(--u));
+}
+
+@function dpx($px) {
+  @return math.div($px * 100vw, 1920);
 }
