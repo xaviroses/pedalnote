@@ -32,11 +32,19 @@
     }
 
     // Mitad en color (izquierda de la composición)
+    // La foto nunca es más baja que el ancho de pantalla: así su ancho visible
+    // no pasa del ~61 % de la composición y no asoma la mitad B/N (que va debajo).
     &--color {
       top: 0;
       height: mpx(450);
+      overflow: hidden;
 
       img {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: max(100%, 105vw); // margen: el recorte no pasa del ~58 %
+        transform: translateY(-50%);
         object-position: 10% 50%;
       }
     }
@@ -108,6 +116,9 @@
       height: 100%;
 
       img {
+        position: static;
+        height: 100%;
+        transform: none;
         // Mantiene a la vista la unión de las dos fotos y el texto vertical
         object-position: 60% 50%;
       }
