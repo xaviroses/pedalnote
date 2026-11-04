@@ -136,9 +136,10 @@
 
   // Móvil: el rótulo va arriba y los cuadraditos abajo, así que el lienzo
   // lleva poco margen; entre elementos, las mismas distancias que Innovation.
-  // Abajo, 23 px como en escritorio (cuadraditos 850 + 22 = 872 de 895)
+  // Arriba 18 px y abajo 23 px, como en escritorio (rótulo en y = 18;
+  // cuadraditos 850 + 22 = 872 de 895)
   .concept__canvas {
-    padding: mpx(48) mpx(80) 23px mpx(26);
+    padding: 18px mpx(80) 23px mpx(26);
   }
 
   // Cuadraditos centrados en el ancho completo (el lienzo tiene más margen a la derecha)
