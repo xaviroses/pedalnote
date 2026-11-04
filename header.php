@@ -14,3 +14,4 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <a class="skip-link visually-hidden" href="#main">Saltar al contenido</a>
+<?php get_template_part( 'template-parts/logo-flotante' ); ?>

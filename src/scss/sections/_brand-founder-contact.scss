@@ -73,13 +73,17 @@
       }
     }
 
+    // Sin padding en el lienzo: cqw se mide sobre su caja de contenido,
+    // y un padding lateral encogería todas las medidas cpx().
     &__canvas {
       min-height: inherit;
-      padding: cpx(110) 0 cpx(60) cpx(267);
+      padding: 0;
     }
 
     &__bio {
       max-width: max(#{cpx(564)}, 22rem);
+      margin-left: cpx(267);
+      padding: cpx(110) 0 cpx(60);
 
       p {
         font-size: max(#{cpx(16)}, 0.8125rem);

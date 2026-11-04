@@ -1,0 +1,44 @@
+@use 'functions' as *;
+
+// ---------------------------------------------------------------------------
+// Sello flotante «PEDALNOTE»
+// Escritorio (XD 1920 × 1080): 292 × 60 px, centrado en la pantalla.
+// Móvil (XD 393): arriba, centrado (y = 76, ~167 px de ancho).
+// Blanco con mix-blend-mode: difference → negro sobre fondos blancos y en
+// negativo sobre las fotos, siempre visible.
+// ---------------------------------------------------------------------------
+
+.seal {
+  --u: min(calc(100vw / 393), 1.6px);
+  position: fixed;
+  z-index: 100;
+  top: mpx(76);
+  left: 50%;
+  width: mpx(167);
+  color: var(--color-white);
+  transform: translateX(-50%);
+  mix-blend-mode: difference;
+
+  &__svg {
+    width: 100%;
+    height: auto;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 4px;
+  }
+
+  @include mq-wide {
+    top: 50%;
+    width: max(#{dpx(292)}, 9rem);
+    transform: translate(-50%, -50%);
+  }
+}
+
+// Enlaces internos (el sello lleva al inicio): desplazamiento suave si se permite
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
