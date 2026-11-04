@@ -57,3 +57,9 @@ $breakpoints: (
     font-size: max(#{dpx(38)}, 1.375rem);
   }
 }
+
+// px del XD de escritorio → unidades del contenedor .xd-canvas (1920 px = 100cqw).
+// Solo dentro de un .xd-canvas y en mq-wide.
+@function cpx($px) {
+  @return calc(#{$px} * 100cqw / 1920);
+}

@@ -1,0 +1,13 @@
+@use 'functions' as *;
+
+// Lienzo del XD: en escritorio, contenedor de consulta para medir con cpx()
+// (1920 px del XD = ancho del contenedor). En móvil no hace nada.
+.xd-canvas {
+  position: relative;
+}
+
+@include mq-wide {
+  .xd-canvas {
+    container-type: inline-size;
+  }
+}

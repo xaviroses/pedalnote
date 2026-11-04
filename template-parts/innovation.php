@@ -8,7 +8,7 @@
  */
 ?>
 <section class="concept concept--innovation" id="innovation" aria-labelledby="innovation-title">
-	<div class="concept__canvas">
+	<div class="concept__canvas xd-canvas">
 		<h2 id="innovation-title" class="side-label"<?php echo pedalnote_xy( 61, 84 ); // phpcs:ignore ?>>
 			<span class="side-label__kicker">INNOVATION</span>
 			<span class="side-label__line" aria-hidden="true"></span>

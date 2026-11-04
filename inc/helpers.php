@@ -130,11 +130,13 @@ function pedalnote_diagram( array $steps ): string {
  */
 function pedalnote_lettering( string $name, int $w, int $h, string $class, int $x, int $y ): string {
 	$base = PEDALNOTE_URI . '/assets/img/' . $name;
+	$ver  = '?ver=' . pedalnote_asset_ver( 'assets/img/' . $name . '.png' ); // se refresca si se regenera
 	return sprintf(
-		'<picture class="lettering %1$s"%2$s aria-hidden="true"><source type="image/webp" srcset="%3$s.webp"><img src="%3$s.png" width="%4$d" height="%5$d" alt="" loading="lazy" decoding="async"></picture>',
+		'<picture class="lettering %1$s"%2$s aria-hidden="true"><source type="image/webp" srcset="%3$s"><img src="%4$s" width="%5$d" height="%6$d" alt="" loading="lazy" decoding="async"></picture>',
 		esc_attr( $class ),
 		pedalnote_xy( $x, $y ),
-		esc_url( $base ),
+		esc_url( $base . '.webp' . $ver ),
+		esc_url( $base . '.png' . $ver ),
 		$w,
 		$h
 	);

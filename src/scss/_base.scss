@@ -66,3 +66,9 @@ picture {
   background: var(--color-black);
   color: var(--color-white);
 }
+
+:where(ul[role='list'], ol) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

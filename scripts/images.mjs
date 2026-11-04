@@ -1,5 +1,5 @@
 // Genera las versiones optimizadas de las fotos (AVIF, WebP y JPG en varios anchos).
-// Uso: npm run images -- "/ruta/a/xd-export/desktop"
+// Uso: npm run images -- "/ruta/a/xd-export/desktop" [lettering]  (lettering = solo los rótulos)
 // Los originales del XD no se versionan (pesan ~60 MB); solo el resultado en assets/img.
 import sharp from 'sharp';
 import { mkdir } from 'node:fs/promises';
@@ -32,7 +32,7 @@ const LETTERING = {
 
 await mkdir(OUT, { recursive: true });
 
-for (const [name, file] of Object.entries(PHOTOS)) {
+for (const [name, file] of Object.entries(process.argv[3] === 'lettering' ? {} : PHOTOS)) {
   const input = sharp(path.join(SRC, file));
   const { width } = await input.metadata();
   for (const w of WIDTHS.filter((w) => w <= width)) {
@@ -46,9 +46,21 @@ for (const [name, file] of Object.entries(PHOTOS)) {
   console.log('✔', name);
 }
 
+// El XD exporta los rótulos con fondo blanco opaco (en el diseño iban en «multiplicar»).
+// Se convierten a tinta negra con transparencia real: alfa = lo oscuro que es cada píxel.
 for (const [name, file] of Object.entries(LETTERING)) {
-  const input = sharp(path.join(SRC, file));
-  await input.clone().webp({ quality: 85, alphaQuality: 90 }).toFile(`${OUT}/${name}.webp`);
-  await input.clone().png({ compressionLevel: 9, palette: true }).toFile(`${OUT}/${name}.png`);
+  const { data, info } = await sharp(path.join(SRC, file))
+    .flatten({ background: '#ffffff' })
+    .greyscale()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  const rgba = Buffer.alloc(info.width * info.height * 4);
+  for (let i = 0; i < info.width * info.height; i++) {
+    const ink = 255 - data[i * info.channels];
+    rgba[i * 4 + 3] = ink < 12 ? 0 : Math.min(255, Math.round(ink * 1.25)); // limpia el ruido del papel
+  }
+  const out = sharp(rgba, { raw: { width: info.width, height: info.height, channels: 4 } });
+  await out.clone().webp({ quality: 85, alphaQuality: 90 }).toFile(`${OUT}/${name}.webp`);
+  await out.clone().png({ compressionLevel: 9 }).toFile(`${OUT}/${name}.png`);
   console.log('✔', name);
 }

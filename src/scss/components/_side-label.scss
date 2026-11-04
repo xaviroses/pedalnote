@@ -1,0 +1,62 @@
+@use '../functions' as *;
+
+// ---------------------------------------------------------------------------
+// Etiqueta lateral vertical: KICKER / línea / TÍTULO, leída de abajo arriba
+// (secciones 3 a 6). En escritorio, colocada en sus coordenadas del XD (--x/--y)
+// dentro de un .xd-canvas; en móvil, a la izquierda a toda la altura del bloque.
+// Color: hereda (negro sobre blanco, blanco sobre foto).
+// ---------------------------------------------------------------------------
+
+.side-label {
+  position: absolute;
+  top: mpx(64);
+  bottom: mpx(72);
+  left: mpx(22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  width: 1.5rem;
+
+  &__kicker,
+  &__title {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+  }
+
+  &__kicker {
+    font-size: 0.6875rem;
+  }
+
+  &__title {
+    font-size: 0.8125rem;
+  }
+
+  &__line {
+    flex: 1;
+    align-self: flex-end;
+    width: 1px;
+    background: currentColor;
+  }
+}
+
+@include mq-wide {
+  .side-label {
+    top: cpx(var(--y));
+    bottom: auto;
+    left: cpx(var(--x));
+    gap: cpx(11);
+    width: cpx(32);
+    height: cpx(639);
+
+    &__kicker {
+      font-size: max(#{cpx(18)}, 0.625rem);
+    }
+
+    &__title {
+      font-size: max(#{cpx(24)}, 0.75rem);
+    }
+  }
+
+}

@@ -1,0 +1,118 @@
+@use '../functions' as *;
+
+// ---------------------------------------------------------------------------
+// Tipos de proyecto (secciones 4 y 6): foto a sangre con parallax, etiqueta
+// lateral en blanco y lista de servicios.
+// Escritorio (XD): 765 px de alto; título 24 px, servicios 16/21 px y dos
+// líneas en blanco entre servicios. Columnas colocadas con --x/--y.
+// ---------------------------------------------------------------------------
+
+.services {
+  --u: min(calc(100vw / 393), 1.6px);
+  position: relative;
+  color: var(--color-white);
+  background: var(--color-black);
+
+  // Móvil: la parte con más vida de la foto, como banda superior fundida a negro;
+  // el texto va debajo, sobre negro (legible), y el rótulo de la sección anterior
+  // cruza sobre la zona clara de la foto.
+  &__media {
+    position: absolute;
+    inset: 0 0 auto;
+    height: mpx(340);
+
+    img {
+      object-position: 85% 50%;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgb(0 0 0 / 0) 35%, rgb(0 0 0 / 1));
+    }
+  }
+
+  &__canvas {
+    padding: mpx(250) mpx(26) mpx(72) mpx(80);
+  }
+
+  .side-label {
+    top: mpx(250);
+  }
+
+  &__title {
+    font-size: var(--fs-24);
+    line-height: var(--lh-heading);
+  }
+
+  &__list {
+    margin: 2rem 0 0;
+  }
+
+  &__item + &__item {
+    margin-top: 1.75rem;
+  }
+
+  &__name,
+  &__text {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.3125; // 21 / 16, como en el XD
+  }
+
+  &__name {
+    text-transform: uppercase;
+  }
+
+  @include mq-wide {
+    min-height: max(#{dpx(765)}, 30rem);
+
+    &__media {
+      inset: 0;
+      height: auto;
+
+      img {
+        object-position: 50% 50%;
+      }
+
+      &::after {
+        content: none;
+      }
+    }
+
+    .side-label {
+      top: cpx(var(--y)); // anula el ajuste de móvil
+    }
+
+    &__canvas {
+      min-height: inherit;
+      padding: 0 0 cpx(63);
+    }
+
+    // Cada columna de texto, en su posición del XD
+    &__col {
+      position: relative;
+      margin-left: cpx(var(--x));
+      padding-top: cpx(var(--y));
+      max-width: cpx(var(--w, 729));
+    }
+
+    &__title {
+      font-size: max(#{cpx(24)}, 1.125rem);
+    }
+
+    &__list {
+      margin-top: max(#{cpx(54)}, 1.75rem);
+    }
+
+    &__item + &__item {
+      margin-top: calc(2 * 1.3125em); // dos líneas en blanco
+    }
+
+    &__name,
+    &__text {
+      font-size: max(#{cpx(16)}, 0.8125rem);
+    }
+  }
+}
