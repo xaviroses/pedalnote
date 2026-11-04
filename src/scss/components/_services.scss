@@ -13,32 +13,32 @@
   color: var(--color-white);
   background: var(--color-black);
 
-  // Móvil: la parte con más vida de la foto, como banda superior fundida a negro;
-  // el texto va debajo, sobre negro (legible), y el rótulo de la sección anterior
-  // cruza sobre la zona clara de la foto.
+  // Móvil: la foto cubre toda la sección, encuadrada en la zona con más vida
+  // (--photo-x), con un velo degradado para leer el texto blanco.
   &__media {
     position: absolute;
-    inset: 0 0 auto;
-    height: mpx(340);
+    inset: 0;
 
     img {
-      object-position: 85% 50%;
+      object-position: var(--photo-x, 75%) 50%;
     }
 
     &::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgb(0 0 0 / 0) 35%, rgb(0 0 0 / 1));
+      background: linear-gradient(to bottom, rgb(0 0 0 / 0.25), rgb(0 0 0 / 0.6) 45%, rgb(0 0 0 / 0.7));
     }
   }
 
+  // El título empieza justo debajo del rótulo INNOVATION, que entra 150 px
   &__canvas {
-    padding: mpx(250) mpx(26) mpx(72) mpx(80);
+    padding: mpx(165) mpx(26) mpx(96) mpx(80);
   }
 
   .side-label {
-    top: mpx(250);
+    top: mpx(165);
+    bottom: mpx(96);
   }
 
   &__col--side {
@@ -49,14 +49,19 @@
     }
   }
 
-  // Sección 6: etiqueta lateral a la derecha
+  // Sección 6: etiqueta lateral a la derecha; foto encuadrada en la mano con el lápiz
   &--transformation {
+    --photo-x: 30%;
+
+    // Aquí no entra ningún rótulo desde arriba: menos margen superior
     .services__canvas {
+      padding-top: mpx(110);
       padding-right: mpx(80);
       padding-left: mpx(26);
     }
 
     .side-label {
+      top: mpx(110);
       right: mpx(22);
       left: auto;
     }
@@ -104,10 +109,12 @@
 
     .side-label {
       top: cpx(var(--y)); // anula el ajuste de móvil
+      bottom: auto;
     }
 
     &--transformation {
       .services__canvas {
+        padding-top: 0; // anula el ajuste de móvil
         padding-right: 0;
         padding-left: 0;
       }

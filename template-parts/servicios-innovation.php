@@ -31,7 +31,7 @@ $pedalnote_services = array(
 			echo pedalnote_picture( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				'servicios-innovation',
 				'',
-				'(max-width: 1023px) and (orientation: portrait) 155vw, (max-width: 767px) 155vw, 100vw'
+				'(max-width: 1023px) and (orientation: portrait) 400vw, (max-width: 767px) 400vw, 100vw'
 			);
 			?>
 		</div>
