@@ -11,13 +11,15 @@
 
 // Sustituta de Suisse mientras no haya licencia web: Switzer Regular (ITF Free Font
 // License, Fontshare). Gratis para la web, pero NO se versiona (la licencia prohíbe
-// publicarla en repositorios públicos): assets/fonts/switzer-regular.woff2 se sube aparte.
+// publicarla en repositorios públicos): assets/fonts/switzer-variable.woff2 se sube aparte.
+// Es la versión variable: su grosor se ajusta con --switzer-wght (_tokens.scss) para
+// igualar a Suisse Book, sin tocar el peso de Suisse.
 @font-face {
   font-family: 'Switzer';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100 900;
   font-display: swap;
-  src: url('../fonts/switzer-regular.woff2') format('woff2');
+  src: url('../fonts/switzer-variable.woff2') format('woff2');
 }
 
 // Último respaldo: Inter 400 (OFL, sí versionada), por si falta el archivo de Switzer.

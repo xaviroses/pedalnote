@@ -17,6 +17,9 @@
   // Tipografía: todo el sitio en un solo peso, Suisse Intl Book (XD); Switzer de sustituta; Inter de último respaldo.
   --font-base: 'Suisse Intl', 'Switzer', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-weight: 400;
+  // Grosor de Switzer (variable) para que pese como Suisse Book: medido 490 (5 nov).
+  // Solo afecta a fuentes variables: Suisse e Inter (estáticas) lo ignoran.
+  --switzer-wght: 490;
 
   // Escala fluida: móvil (375) → valor exacto del XD (1920)
   --fs-14: #{fluid(12, 14)};

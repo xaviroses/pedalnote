@@ -45,7 +45,7 @@ add_action( 'wp_enqueue_scripts', function () {
  * Archivo de la fuente principal disponible: Suisse (con licencia) > Switzer > Inter.
  */
 function pedalnote_main_font(): string {
-	foreach ( array( 'suisse-intl-book.woff2', 'switzer-regular.woff2' ) as $file ) {
+	foreach ( array( 'suisse-intl-book.woff2', 'switzer-variable.woff2' ) as $file ) {
 		if ( file_exists( PEDALNOTE_DIR . '/assets/fonts/' . $file ) ) {
 			return $file;
 		}
