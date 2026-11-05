@@ -96,16 +96,14 @@ export function initReveal(gsap) {
     });
   });
 
-  // 5 · Tipos de proyecto: título y servicios en «slide up reveal», escalonados
-  all('.services__col').forEach((col) => {
-    gsap.from(all('.services__title, .services__item', col), {
-      y: 24,
-      opacity: 0,
-      duration: 0.8,
-      ease: EASE,
-      stagger: 0.12,
-      scrollTrigger: onEnter(col, 'top 80%'),
-    });
+  // 5 · Tipos de proyecto: título y cada servicio suben y aparecen ligados al
+  //     scroll (scrub, en los dos sentidos), cada uno en su propio tramo
+  all('.services__title, .services__item').forEach((el) => {
+    gsap.fromTo(
+      el,
+      { y: 24, opacity: 0 },
+      { y: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 70%', scrub: true } }
+    );
   });
 
   // 6 · Selected Work: el rectángulo crece de abajo arriba y después suben
