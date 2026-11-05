@@ -72,3 +72,18 @@ picture {
   padding: 0;
   list-style: none;
 }
+
+// Animaciones: el hero se oculta hasta su entrada (lo muestra reveal.js).
+// Respaldo: si el JS no llega a ejecutarse, se muestra igualmente a los 2,5 s.
+@media (prefers-reduced-motion: no-preference) {
+  .js-anim .hero__content {
+    visibility: hidden;
+    animation: pn-show 0s 2.5s forwards;
+  }
+}
+
+@keyframes pn-show {
+  to {
+    visibility: visible;
+  }
+}

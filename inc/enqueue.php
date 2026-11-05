@@ -48,3 +48,9 @@ add_action( 'wp_head', function () {
 		esc_url( PEDALNOTE_URI . '/assets/fonts/' . ( file_exists( PEDALNOTE_DIR . '/assets/fonts/suisse-intl-book.woff2' ) ? 'suisse-intl-book.woff2' : 'inter-400-latin.woff2' ) )
 	);
 }, 1 );
+
+// Marca <html class="js-anim"> antes de pintar, para que los textos del hero no
+// «parpadeen» antes de su animación de entrada. Si el JS falla, el CSS los muestra a los 2,5 s.
+add_action( 'wp_head', function () {
+	echo "<script>document.documentElement.classList.add('js-anim')</script>\n";
+}, 0 );

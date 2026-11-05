@@ -6,7 +6,10 @@ import { initReveal } from './reveal.js';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-if (!reduceMotion) {
+if (reduceMotion) {
+  // Sin animaciones: el hero (oculto hasta animarse) se muestra tal cual
+  document.documentElement.classList.remove('js-anim');
+} else {
   gsap.registerPlugin(ScrollTrigger);
   initParallax(gsap);
   initReveal(gsap);
