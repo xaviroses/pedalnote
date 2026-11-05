@@ -41,11 +41,23 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_dequeue_style( 'classic-theme-styles' );
 }, 100 );
 
+/**
+ * Archivo de la fuente principal disponible: Suisse (con licencia) > Switzer > Inter.
+ */
+function pedalnote_main_font(): string {
+	foreach ( array( 'suisse-intl-book.woff2', 'switzer-regular.woff2' ) as $file ) {
+		if ( file_exists( PEDALNOTE_DIR . '/assets/fonts/' . $file ) ) {
+			return $file;
+		}
+	}
+	return 'inter-400-latin.woff2';
+}
+
 // Precarga de la fuente principal (evita el salto de tipografía al cargar).
 add_action( 'wp_head', function () {
 	printf(
 		'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
-		esc_url( PEDALNOTE_URI . '/assets/fonts/' . ( file_exists( PEDALNOTE_DIR . '/assets/fonts/suisse-intl-book.woff2' ) ? 'suisse-intl-book.woff2' : 'inter-400-latin.woff2' ) )
+		esc_url( PEDALNOTE_URI . '/assets/fonts/' . pedalnote_main_font() )
 	);
 }, 1 );
 

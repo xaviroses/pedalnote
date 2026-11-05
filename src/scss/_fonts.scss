@@ -1,6 +1,6 @@
 // Suisse Intl Book (la del XD). El archivo NO está en el repo (fuente comercial):
 // assets/fonts/suisse-intl-book.woff2 se copia aparte en cada entorno con licencia.
-// Si no está, el navegador usa Inter (respaldo, OFL, sí versionada).
+// Si no está, el navegador usa Switzer (y si tampoco, Inter).
 @font-face {
   font-family: 'Suisse Intl';
   font-style: normal;
@@ -9,7 +9,18 @@
   src: url('../fonts/suisse-intl-book.woff2') format('woff2');
 }
 
-// Respaldo: Inter 400 (OFL), servida desde el tema.
+// Sustituta de Suisse mientras no haya licencia web: Switzer Regular (ITF Free Font
+// License, Fontshare). Gratis para la web, pero NO se versiona (la licencia prohíbe
+// publicarla en repositorios públicos): assets/fonts/switzer-regular.woff2 se sube aparte.
+@font-face {
+  font-family: 'Switzer';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/switzer-regular.woff2') format('woff2');
+}
+
+// Último respaldo: Inter 400 (OFL, sí versionada), por si falta el archivo de Switzer.
 @font-face {
   font-family: 'Inter';
   font-style: normal;

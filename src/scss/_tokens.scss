@@ -14,8 +14,8 @@
   --color-yellow: #ffcf02;
   --color-green: #2dab66;
 
-  // Tipografía: todo el sitio en un solo peso, Suisse Intl Book (XD); Inter de respaldo.
-  --font-base: 'Suisse Intl', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  // Tipografía: todo el sitio en un solo peso, Suisse Intl Book (XD); Switzer de sustituta; Inter de último respaldo.
+  --font-base: 'Suisse Intl', 'Switzer', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-weight: 400;
 
   // Escala fluida: móvil (375) → valor exacto del XD (1920)

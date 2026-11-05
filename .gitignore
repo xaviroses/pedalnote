@@ -8,3 +8,7 @@ node_modules/
 # Suisse Intl (fuente comercial de Swiss Typefaces): NO se versiona en el repo público.
 # En producción hay que subirla al servidor aparte, con la licencia web comprada.
 assets/fonts/suisse-intl-*
+
+# Switzer (ITF Free Font License, Fontshare): gratis para la web, pero la licencia
+# NO permite redistribuirla en repositorios públicos. Se sube al servidor aparte.
+assets/fonts/switzer-*
