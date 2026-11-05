@@ -8,8 +8,8 @@
  * @package pedalnote
  */
 
-// Pendiente: URL exacta de LinkedIn (ver CLAUDE.md). Mientras esté vacía, se muestra sin enlace.
-$pedalnote_linkedin = '';
+// LinkedIn de la empresa (facilitado por el cliente, 5 nov 2026).
+$pedalnote_linkedin = 'https://www.linkedin.com/company/146620487/';
 
 $pedalnote_legal = array(
 	'aviso-legal'            => 'Aviso legal',
