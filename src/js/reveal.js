@@ -83,17 +83,19 @@ export function initReveal(gsap) {
     }
   });
 
-  // 4 · Etiquetas laterales: solo se dibuja la línea fina (el texto no se mueve)
-  all('.side-label').forEach((label) => {
-    const line = one('.side-label__line', label);
-    if (!line) return;
-    gsap.from(line, {
-      scaleY: 0,
-      transformOrigin: 'top center',
-      duration: 1.4,
-      ease: 'power2.inOut',
-      scrollTrigger: onEnter(label, 'top 85%'),
-    });
+  // 4 · Etiquetas laterales: solo se dibuja la línea fina (el texto no se mueve),
+  //     ligada al scroll en los dos sentidos (scrub)
+  all('.side-label__line').forEach((line) => {
+    gsap.fromTo(
+      line,
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        transformOrigin: 'top center',
+        ease: 'none',
+        scrollTrigger: { trigger: line, start: 'top 90%', end: 'bottom 60%', scrub: true },
+      }
+    );
   });
 
   // 5 · Tipos de proyecto: título y cada servicio suben y aparecen ligados al
