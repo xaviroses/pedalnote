@@ -1,0 +1,85 @@
+@use '../functions' as *;
+
+// ---------------------------------------------------------------------------
+// Páginas interiores (legales y 404). Sin diseño en el XD: criterio propio,
+// sencillo y legible. Franja negra arriba con el sello quieto (en blanco no se
+// vería: el sello es siempre blanco) y columna de texto centrada.
+// ---------------------------------------------------------------------------
+
+body:not(.home) {
+  // Franja negra donde se apoya el sello
+  &::before {
+    content: '';
+    display: block;
+    height: 120px;
+    background: var(--color-black);
+  }
+
+  .seal {
+    position: absolute;
+    top: 60px;
+    width: 167px;
+    transform: translate(-50%, -50%);
+
+    @include mq-wide {
+      width: 220px;
+    }
+  }
+}
+
+.inner {
+  padding: 64px 24px 32px;
+
+  @include mq-wide {
+    padding-top: 96px;
+  }
+
+  &__content {
+    max-width: 46rem;
+    margin: 0 auto;
+    font-size: var(--fs-16);
+    line-height: 1.6;
+
+    p,
+    ul,
+    ol {
+      margin: 0 0 1em;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.25em;
+    }
+
+    ul {
+      list-style: disc;
+    }
+
+    ol {
+      list-style: decimal;
+    }
+
+    h2 {
+      margin: 2.5em 0 0.75em;
+      font-size: var(--fs-24);
+      line-height: var(--lh-heading);
+    }
+
+    h3 {
+      margin: 2em 0 0.5em;
+      font-size: var(--fs-18);
+      line-height: var(--lh-heading);
+    }
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+  }
+
+  &__title {
+    margin-bottom: 1.25em;
+    font-size: var(--fs-36);
+    line-height: var(--lh-heading);
+  }
+}

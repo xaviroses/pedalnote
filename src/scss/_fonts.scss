@@ -1,15 +1,8 @@
-// Suisse Intl Book (la del XD). El archivo NO está en el repo (fuente comercial):
-// assets/fonts/suisse-intl-book.woff2 se copia aparte en cada entorno con licencia.
-// Si no está, el navegador usa Switzer (y si tampoco, Inter).
-@font-face {
-  font-family: 'Suisse Intl';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../fonts/suisse-intl-book.woff2') format('woff2');
-}
+// Suisse Intl Book (la del XD): su @font-face lo escribe inc/enqueue.php SOLO si existe
+// assets/fonts/suisse-intl-book.woff2 (fuente comercial, no versionada). Así no hay
+// petición fallida (404) en los entornos sin licencia.
 
-// Sustituta de Suisse mientras no haya licencia web: Switzer Regular (ITF Free Font
+// Sustituta de Suisse mientras no haya licencia web: Switzer (ITF Free Font
 // License, Fontshare). Gratis para la web, pero NO se versiona (la licencia prohíbe
 // publicarla en repositorios públicos): assets/fonts/switzer-variable.woff2 se sube aparte.
 // Es la versión variable: su grosor se ajusta con --switzer-wght (_tokens.scss) para

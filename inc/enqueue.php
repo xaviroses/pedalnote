@@ -20,6 +20,17 @@ function pedalnote_asset_ver( string $rel ): string {
 add_action( 'wp_enqueue_scripts', function () {
 	if ( file_exists( PEDALNOTE_DIR . '/assets/css/main.css' ) ) {
 		wp_enqueue_style( 'pedalnote', PEDALNOTE_URI . '/assets/css/main.css', array(), pedalnote_asset_ver( 'assets/css/main.css' ) );
+
+		// Suisse Intl solo donde esté su archivo (con licencia): si no, ni se pide.
+		if ( file_exists( PEDALNOTE_DIR . '/assets/fonts/suisse-intl-book.woff2' ) ) {
+			wp_add_inline_style(
+				'pedalnote',
+				sprintf(
+					"@font-face{font-family:'Suisse Intl';font-style:normal;font-weight:400;font-display:swap;src:url('%s') format('woff2')}",
+					esc_url( PEDALNOTE_URI . '/assets/fonts/suisse-intl-book.woff2' )
+				)
+			);
+		}
 	}
 
 	if ( file_exists( PEDALNOTE_DIR . '/assets/js/main.js' ) ) {

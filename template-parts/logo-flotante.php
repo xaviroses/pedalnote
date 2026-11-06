@@ -2,11 +2,12 @@
 /**
  * Sello «PEDALNOTE» fijo en pantalla (SVG del XD: rectángulo con las letras caladas).
  * Siempre blanco, como en el XD (decisión del diseño: no cambia de color con el fondo).
+ * En las páginas interiores (legales, 404) va quieto sobre una franja negra y lleva a la portada.
  *
  * @package pedalnote
  */
 ?>
-<a class="seal" href="#hero" aria-label="Pedal Note, volver al inicio">
+<a class="seal" href="<?php echo is_front_page() ? '#hero' : esc_url( home_url( '/' ) ); ?>" aria-label="Pedal Note, volver al inicio">
 	<svg class="seal__svg" viewBox="0 0 291.902 60.054" width="292" height="60" aria-hidden="true" focusable="false">
 		<path d="M291.9,60.054H0V0H291.9ZM25.437,44.316H30.01V33.279h4.77c7.056,0,12.1-1.577,12.1-8.791,0-7.135-5.046-8.751-12.1-8.751H25.437Zm4.573-14.98V19.6h5.085c3.942,0,7.056.591,7.056,4.888,0,4.376-3.114,4.849-7.056,4.849Zm22.151,14.98H72.067V40.335H56.734V31.584H71.161V27.642H56.734V19.718H72.067V15.737H52.161Zm26.25,0h8.121c9.106,0,15.807-3.39,15.807-14.31,0-10.879-6.7-14.27-15.807-14.27H78.411Zm4.573-3.863V19.6h3.469c5.716,0,11.156,1.144,11.156,10.407,0,9.3-5.44,10.447-11.156,10.447Zm21.56,3.863h4.73l2.09-5.952H124.1l2.128,5.952h4.928L120.391,15.737h-5.2Zm8.2-9.816,4.928-14.073L122.716,34.5Zm22.939,9.816h19.395V40.335H140.255v-24.6h-4.573Zm24.122,0H164.3V20.862L177.07,44.316h6.347V15.737h-4.533V39.152L166.15,15.737H159.8Zm43.28.512c8.357,0,13.678-6.11,13.678-14.822,0-8.672-5.322-14.782-13.678-14.782s-13.679,6.11-13.679,14.782c0,8.712,5.322,14.822,13.679,14.822m0-3.824c-5.006,0-8.988-3.863-8.988-11,0-7.1,3.982-10.959,8.988-10.959s8.987,3.863,8.987,10.959c0,7.135-3.981,11-8.987,11m24.831,3.312h4.573V19.679h9.264V15.737h-23.1v3.942h9.264Zm18.643,0h19.907V40.335H251.132V31.584H265.56V27.642H251.132V19.718h15.334V15.737H246.559Z" fill="currentColor"/>
 	</svg>
