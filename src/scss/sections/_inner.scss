@@ -34,7 +34,16 @@ body:not(.home) .seal {
   }
 }
 
+// La página ocupa al menos el alto de la pantalla: el pie (barra negra) queda siempre abajo
+body:not(.home) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
 .inner {
+  flex: 1 0 auto;
   // Mismos márgenes laterales que el pie (.contact): el texto llega al ancho de la barra
   padding: 112px 16px 0;
 
