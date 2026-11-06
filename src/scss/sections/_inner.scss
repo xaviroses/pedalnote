@@ -2,41 +2,36 @@
 
 // ---------------------------------------------------------------------------
 // Páginas interiores (legales y 404). Sin diseño en el XD: criterio propio,
-// sencillo y legible. Franja negra arriba con el sello quieto (en blanco no se
-// vería: el sello es siempre blanco) y columna de texto centrada.
+// sutil y legible. Fondo blanco; el sello va quieto arriba, invertido (caja negra
+// con las letras caladas) y a la mitad de tamaño. El texto ocupa el mismo ancho
+// que la barra negra del pie.
 // ---------------------------------------------------------------------------
 
-body:not(.home) {
-  // Franja negra donde se apoya el sello
-  &::before {
-    content: '';
-    display: block;
-    height: 120px;
-    background: var(--color-black);
+body:not(.home) .seal {
+  position: absolute;
+  top: 32px;
+  width: 84px; // mitad de los 167 px del móvil
+  color: var(--color-black);
+  transform: translateX(-50%);
+
+  &:focus-visible {
+    outline-color: var(--color-black);
   }
 
-  .seal {
-    position: absolute;
-    top: 60px;
-    width: 167px;
-    transform: translate(-50%, -50%);
-
-    @include mq-wide {
-      width: 220px;
-    }
+  @include mq-wide {
+    width: 110px;
   }
 }
 
 .inner {
-  padding: 64px 24px 32px;
+  // Mismos márgenes laterales que el pie (.contact): el texto llega al ancho de la barra
+  padding: 112px 16px 0;
 
   @include mq-wide {
-    padding-top: 96px;
+    padding: 144px max(#{dpx(100)}, 1.5rem) 0;
   }
 
   &__content {
-    max-width: 46rem;
-    margin: 0 auto;
     font-size: var(--fs-16);
     line-height: 1.6;
 
