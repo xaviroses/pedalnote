@@ -40,6 +40,13 @@ body:not(.home) {
   flex-direction: column;
   min-height: 100vh;
   min-height: 100svh;
+
+  // Con la barra de administración de WordPress (sesión iniciada) el documento baja
+  // 32 px (46 en móvil): se descuentan para no provocar scroll.
+  &.admin-bar {
+    min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px));
+    min-height: calc(100svh - var(--wp-admin--admin-bar--height, 32px));
+  }
 }
 
 .inner {
