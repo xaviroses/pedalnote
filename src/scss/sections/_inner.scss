@@ -1,25 +1,36 @@
+@use 'sass:math';
 @use '../functions' as *;
 
 // ---------------------------------------------------------------------------
 // Páginas interiores (legales y 404). Sin diseño en el XD: criterio propio,
 // sutil y legible. Fondo blanco; el sello va quieto arriba, invertido (caja negra
-// con las letras caladas) y a la mitad de tamaño. El texto ocupa el mismo ancho
-// que la barra negra del pie.
+// con las letras caladas), alineado a la izquierda con la barra negra del pie y
+// con su misma altura. El texto ocupa el mismo ancho que esa barra.
 // ---------------------------------------------------------------------------
 
+// Proporción del sello (SVG del XD: 291,902 × 60,054)
+$seal-ratio: math.div(291.902, 60.054);
+
 body:not(.home) .seal {
+  // Altura de la barra del pie: en escritorio, la de .contact__bar; en móvil la barra
+  // va apilada en varias líneas, así que se usa su altura mínima de escritorio (2rem).
+  --seal-h: 2rem;
+
   position: absolute;
   top: 32px;
-  width: 84px; // mitad de los 167 px del móvil
+  left: 16px;
+  width: calc(var(--seal-h) * #{$seal-ratio});
   color: var(--color-black);
-  transform: translateX(-50%);
+  transform: none;
 
   &:focus-visible {
     outline-color: var(--color-black);
   }
 
   @include mq-wide {
-    width: 110px;
+    --seal-h: max(#{dpx(39)}, 2rem);
+
+    left: max(#{dpx(100)}, 1.5rem);
   }
 }
 
