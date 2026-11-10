@@ -59,7 +59,7 @@ body:not(.home) {
   }
 
   &__content {
-    font-size: var(--fs-16);
+    font-size: max(var(--fs-14), 0.8125rem); // 14 px en escritorio, 13 px en móvil
     line-height: 1.6;
 
     p,
