@@ -1,21 +1,10 @@
-// Suisse Intl Book (la del XD): su @font-face lo escribe inc/enqueue.php SOLO si existe
-// assets/fonts/suisse-intl-book.woff2 (fuente comercial, no versionada). Así no hay
-// petición fallida (404) en los entornos sin licencia.
+// Suisse Intl Book (la del XD). Licencia Company de Swiss Typefaces a nombre de Pedal Note
+// (pedido 010379d5, oct 2026): uso web permitido, pero el archivo NO se puede distribuir,
+// así que no se versiona (repo público) y se sube al servidor aparte.
+// Su @font-face lo escribe inc/enqueue.php SOLO si existe assets/fonts/suisse-intl-book.woff2:
+// así no hay petición fallida (404) en un entorno sin el archivo.
 
-// Sustituta de Suisse mientras no haya licencia web: Switzer (ITF Free Font
-// License, Fontshare). Gratis para la web, pero NO se versiona (la licencia prohíbe
-// publicarla en repositorios públicos): assets/fonts/switzer-variable.woff2 se sube aparte.
-// Es la versión variable: su grosor se ajusta con --switzer-wght (_tokens.scss) para
-// igualar a Suisse Book, sin tocar el peso de Suisse.
-@font-face {
-  font-family: 'Switzer';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url('../fonts/switzer-variable.woff2') format('woff2');
-}
-
-// Último respaldo: Inter 400 (OFL, sí versionada), por si falta el archivo de Switzer.
+// Respaldo: Inter 400 (OFL, sí versionada), por si falta el archivo de Suisse.
 @font-face {
   font-family: 'Inter';
   font-style: normal;

@@ -53,10 +53,10 @@ add_action( 'wp_enqueue_scripts', function () {
 }, 100 );
 
 /**
- * Archivo de la fuente principal disponible: Suisse (con licencia) > Switzer > Inter.
+ * Archivo de la fuente principal disponible: Suisse (con licencia) > Inter.
  */
 function pedalnote_main_font(): string {
-	foreach ( array( 'suisse-intl-book.woff2', 'switzer-variable.woff2' ) as $file ) {
+	foreach ( array( 'suisse-intl-book.woff2' ) as $file ) {
 		if ( file_exists( PEDALNOTE_DIR . '/assets/fonts/' . $file ) ) {
 			return $file;
 		}
