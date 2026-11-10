@@ -49,6 +49,12 @@ body:not(.home) {
   }
 }
 
+// En la portada el pie lleva encima el hueco del XD (218 px a 1920). Aquí sobra: la página
+// ya empuja el pie hacia abajo, y ese hueco provocaba scroll aunque el texto cupiera.
+body:not(.home) .contact {
+  padding-top: 64px;
+}
+
 .inner {
   flex: 1 0 auto;
   // Mismos márgenes laterales que el pie (.contact): el texto llega al ancho de la barra
