@@ -144,8 +144,8 @@
       margin: 0;
       padding: 0;
       // Escala con el ancho, igual que la foto: así nunca invade la mitad B/N
-      // (90 px a 1920 con Suisse Intl = 1132 px, como en el XD).
-      font-size: max(#{dpx(90)}, 2.25rem);
+      // (88 px a 1920 con la Suisse Intl Book oficial = 1132 px, como en el XD).
+      font-size: max(#{dpx(88)}, 2.25rem);
       line-height: 1;
     }
 
