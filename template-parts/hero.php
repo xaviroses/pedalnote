@@ -16,7 +16,8 @@ $pedalnote_hero_sizes = '(max-width: 767px) 263vw, (max-width: 1023px) and (orie
 <section class="hero" id="hero" aria-labelledby="hero-title">
 	<div class="hero__media" aria-hidden="true">
 		<?php
-		echo pedalnote_picture( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo pedalnote_home_picture( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			'hero_image',
 			'hero',
 			'',
 			$pedalnote_hero_sizes,
@@ -25,7 +26,8 @@ $pedalnote_hero_sizes = '(max-width: 767px) 263vw, (max-width: 1023px) and (orie
 				'priority' => true,
 			)
 		);
-		echo pedalnote_picture( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo pedalnote_home_picture( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			'hero_image',
 			'hero',
 			'',
 			$pedalnote_hero_sizes,
@@ -35,14 +37,14 @@ $pedalnote_hero_sizes = '(max-width: 767px) 263vw, (max-width: 1023px) and (orie
 	</div>
 
 	<div class="hero__content">
-		<h1 id="hero-title" class="hero__title">Innovation&amp;Transformation</h1>
-		<p class="hero__tagline">We help organisations understand what matters, define what comes next and make it happen.</p>
+		<h1 id="hero-title" class="hero__title"><?php echo esc_html( pedalnote_home( 'hero_title' ) ); ?></h1>
+		<p class="hero__tagline"><?php echo esc_html( pedalnote_home( 'hero_tagline' ) ); ?></p>
 
-		<p class="hero__intro hero__intro--first">Nos adaptamos a la frecuencia de cada cliente: a sus retos, su contexto y su cultura.</p>
-		<p class="hero__intro hero__intro--mobile">Defining Tomorrow — identificar qué importa y definir qué viene.<br>Make it Happen — activar a las personas para convertir las decisiones en una realidad compartida.</p>
-		<p class="hero__intro hero__intro--second">Combinamos innovación, estrategia y transformación desde una mirada humana, curiosa y práctica.</p>
+		<p class="hero__intro hero__intro--first"><?php echo pedalnote_lines( pedalnote_home( 'hero_intro_1' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+		<p class="hero__intro hero__intro--mobile"><?php echo pedalnote_lines( pedalnote_home( 'hero_intro_mobile' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+		<p class="hero__intro hero__intro--second"><?php echo pedalnote_lines( pedalnote_home( 'hero_intro_2' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 	</div>
 
 	<?php // Texto incrustado en la foto B/N: se repite aquí para buscadores y lectores de pantalla. ?>
-	<p class="visually-hidden">nota pedal: acorde, nota sostenida que ayuda a impulsarlo o a cambiarlo de una forma suave; llevarlo más allá o ser el punto de apoyo para que cambie.</p>
+	<p class="visually-hidden"><?php echo esc_html( pedalnote_home( 'hero_photo_text' ) ); ?></p>
 </section>

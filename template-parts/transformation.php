@@ -16,25 +16,29 @@
 		?>
 
 		<h2 id="transformation-title" class="side-label side-label--down"<?php echo pedalnote_xy( 1818, 179 ); // phpcs:ignore ?>>
-			<span class="side-label__kicker">TRANSFORMATION</span>
+			<span class="side-label__kicker"><?php echo esc_html( pedalnote_home( 'transformation_kicker' ) ); ?></span>
 			<span class="side-label__line" aria-hidden="true"></span>
-			<span class="side-label__title">MAKE IT HAPPEN</span>
+			<span class="side-label__title"><?php echo esc_html( pedalnote_home( 'transformation_title' ) ); ?></span>
 		</h2>
 
 		<p class="concept__lead"<?php echo pedalnote_xy( 235, 188 ); // phpcs:ignore ?>>
 			<span class="diagram__bar" aria-hidden="true"></span>
-			<span>From Idea to <strong>REALIDAD</strong></span>
+			<span><?php echo esc_html( pedalnote_home( 'transformation_lead' ) ); ?> <strong><?php echo esc_html( pedalnote_home( 'transformation_lead_highlight' ) ); ?></strong></span>
 		</p>
 
 		<?php
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		// Posición de cada barra en el XD (fija); los textos salen del campo «transformation_steps».
 		echo pedalnote_diagram(
-			array(
-				array( 'label' => 'IMPLICAR', 'x' => 875, 'y' => 340 ),
-				array( 'label' => 'ALINEAR', 'x' => 525, 'y' => 415 ),
-				array( 'label' => 'ACTIVAR', 'x' => 705, 'y' => 513 ),
-				array( 'label' => 'Para que los equipos la entiendan, la hagan suya y cambien conversaciones, comportamientos y rituales.', 'x' => 1130, 'y' => 613, 'side' => 'left', 'long' => true ),
-				array( 'label' => 'Para que una estrategia, una integración, una transformación comercial o un cambio cultural empiece a formar parte del día a día.', 'x' => 1610, 'y' => 676, 'side' => 'left', 'long' => true ),
+			pedalnote_diagram_steps(
+				array(
+					array( 'x' => 875, 'y' => 340 ),
+					array( 'x' => 525, 'y' => 415 ),
+					array( 'x' => 705, 'y' => 513 ),
+					array( 'x' => 1130, 'y' => 613, 'side' => 'left', 'long' => true ),
+					array( 'x' => 1610, 'y' => 676, 'side' => 'left', 'long' => true ),
+				),
+				'transformation_steps'
 			)
 		);
 		?>

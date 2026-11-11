@@ -15,74 +15,27 @@
  * @package pedalnote
  */
 
-$pedalnote_cases = array(
-	array(
-		'col'   => 1,
-		'dx'    => 84,
-		'mt'    => 76,
-		'order' => 1,
-		'x'     => 338,
-		'color' => 'red',
-		'name'  => 'Banc Sabadell · Zurich',
-		'claim' => 'When the channel isn’t the real question.',
-		'text'  => 'Ayudando a incorporar la perspectiva del cliente en la definición de productos, servicios y canales aseguradores — desde protección y salud hasta ahorro para la jubilación y experiencia digital.',
-	),
-	array(
-		'col'   => 2,
-		'dx'    => 87,
-		'mt'    => 0,
-		'order' => 2,
-		'x'     => 911,
-		'color' => 'sky',
-		'name'  => 'Holaluz',
-		'claim' => 'Understand first. Sell differently afterwards.',
-		'text'  => 'Una colaboración continuada alrededor de la comprensión del cliente, la propuesta de valor, nuevos productos, la experiencia comercial y formas concretas de llevar el customer centricity al negocio.',
-	),
-	array(
-		'col'   => 3,
-		'dx'    => 118,
-		'mt'    => 133,
-		'order' => 3,
-		'x'     => 1512,
-		'color' => 'light-grey',
-		'name'  => 'Vidal & Vidal',
-		'claim' => 'Jewellery doesn’t just decorate a moment. It gives it meaning.',
-		'text'  => 'Entendiendo cómo la identidad, los rituales y los momentos de vida moldean el significado, la elección y la experiencia de la joyería.',
-	),
-	array(
-		'col'   => 2,
-		'dx'    => 117,
-		'mt'    => 61,
-		'order' => 4,
-		'x'     => 941,
-		'color' => 'green',
-		'name'  => 'Verifait / Wardians',
-		'claim' => 'The technology was already there. The value wasn’t visible yet',
-		'text'  => 'Convirtiendo capacidades complejas de vídeo e inteligencia artificial en una propuesta más clara, ofertas específicas por sector y un modelo comercial más accionable.',
-	),
-	array(
-		'col'   => 1,
-		'dx'    => 197,
-		'mt'    => 143,
-		'order' => 5,
-		'x'     => 451,
-		'color' => 'yellow',
-		'name'  => 'Codorníu',
-		'claim' => 'People don’t consume categories. They live moments.',
-		'text'  => 'Explorando personas, ocasiones y contextos para descubrir nuevas oportunidades de consumo y convertirlas en ideas de producto, experiencia y comunicación.',
-	),
-	array(
-		'col'   => 3,
-		'dx'    => 0,
-		'mt'    => 112,
-		'order' => 6,
-		'x'     => 1394,
-		'color' => 'red',
-		'name'  => 'Exide Technologies',
-		'claim' => 'From safety as a priority to safety as a way of leading.',
-		'text'  => 'Ayudando a que la seguridad pase de la política a la cultura a través del liderazgo, el aprendizaje compartido, la experimentación local y prácticas capaces de extenderse entre plantas.',
-	),
+// Sitio de cada caso en la rejilla (del XD, fijo), en orden de lectura. El contenido
+// (color, cliente, frase y texto) sale del campo «work_cases», en el mismo orden.
+$pedalnote_layout = array(
+	array( 'col' => 1, 'dx' => 84, 'mt' => 76, 'x' => 338 ),
+	array( 'col' => 2, 'dx' => 87, 'mt' => 0, 'x' => 911 ),
+	array( 'col' => 3, 'dx' => 118, 'mt' => 133, 'x' => 1512 ),
+	array( 'col' => 2, 'dx' => 117, 'mt' => 61, 'x' => 941 ),
+	array( 'col' => 1, 'dx' => 197, 'mt' => 143, 'x' => 451 ),
+	array( 'col' => 3, 'dx' => 0, 'mt' => 112, 'x' => 1394 ),
 );
+$pedalnote_colors = array( 'red', 'sky', 'light-grey', 'yellow', 'green' );
+
+$pedalnote_cases = array();
+foreach ( array_values( (array) pedalnote_home( 'work_cases' ) ) as $pedalnote_i => $pedalnote_case ) {
+	if ( ! isset( $pedalnote_layout[ $pedalnote_i ] ) ) {
+		break;
+	}
+	$pedalnote_case['order'] = $pedalnote_i + 1;
+	$pedalnote_case['color'] = in_array( $pedalnote_case['color'] ?? '', $pedalnote_colors, true ) ? $pedalnote_case['color'] : 'red';
+	$pedalnote_cases[]       = $pedalnote_layout[ $pedalnote_i ] + $pedalnote_case;
+}
 
 // Agrupados por columna (en el orden del array dentro de cada columna).
 $pedalnote_cols = array( 1 => array(), 2 => array(), 3 => array() );
@@ -95,15 +48,15 @@ foreach ( $pedalnote_cases as $pedalnote_case ) {
 		<div class="parallax__layer" data-parallax>
 			<?php
 			// Fondo desenfocado. En móvil la foto (fija al alto de pantalla) se ve a ~230 % del ancho.
-			echo pedalnote_picture( 'selected-work', '', '(max-width: 899px) 230vw, 100vw' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo pedalnote_home_picture( 'work_image', 'selected-work', '', '(max-width: 899px) 230vw, 100vw' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>
 		</div>
 	</div>
 
 	<div class="work__canvas">
 		<header class="work__header">
-			<h2 id="selected-work-title" class="work__title">Selected work</h2>
-			<p class="work__subtitle">Notes from real projects.</p>
+			<h2 id="selected-work-title" class="work__title"><?php echo esc_html( pedalnote_home( 'work_title' ) ); ?></h2>
+			<p class="work__subtitle"><?php echo esc_html( pedalnote_home( 'work_subtitle' ) ); ?></p>
 		</header>
 
 		<div class="work__grid">
@@ -112,9 +65,9 @@ foreach ( $pedalnote_cases as $pedalnote_case ) {
 					<?php foreach ( $pedalnote_col as $pedalnote_case ) : ?>
 						<li class="work__case<?php echo 0 === $pedalnote_case['order'] % 2 ? ' work__case--even' : ''; ?>" style="<?php echo esc_attr( sprintf( '--dx:%d;--mt:%d;--x:%d;order:%d', $pedalnote_case['dx'], $pedalnote_case['mt'], $pedalnote_case['x'], $pedalnote_case['order'] ) ); ?>">
 							<span class="work__swatch" style="background:var(--color-<?php echo esc_attr( $pedalnote_case['color'] ); ?>)" aria-hidden="true"></span>
-							<h3 class="work__name"><?php echo esc_html( $pedalnote_case['name'] ); ?></h3>
-							<p class="work__claim"><?php echo esc_html( $pedalnote_case['claim'] ); ?></p>
-							<p class="work__text"><?php echo esc_html( $pedalnote_case['text'] ); ?></p>
+							<h3 class="work__name"><?php echo esc_html( $pedalnote_case['name'] ?? '' ); ?></h3>
+							<p class="work__claim"><?php echo esc_html( $pedalnote_case['claim'] ?? '' ); ?></p>
+							<p class="work__text"><?php echo pedalnote_lines( (string) ( $pedalnote_case['text'] ?? '' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 						</li>
 					<?php endforeach; ?>
 				</ul>

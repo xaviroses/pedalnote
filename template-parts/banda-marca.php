@@ -9,7 +9,7 @@
 	<div class="brand__media parallax">
 		<div class="parallax__layer" data-parallax>
 			<?php
-			echo pedalnote_picture( 'banda-marca', 'Pedal Note, escrito a mano sobre una cinta', '100vw' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo pedalnote_home_picture( 'brand_image', 'banda-marca', (string) pedalnote_home( 'brand_alt' ), '100vw' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>
 		</div>
 	</div>

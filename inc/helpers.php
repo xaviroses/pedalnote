@@ -142,3 +142,120 @@ function pedalnote_lettering( string $name, int $w, int $h, string $class, int $
 		$h
 	);
 }
+
+/**
+ * Valor de un campo de la portada (ACF), con el contenido del XD como respaldo.
+ *
+ * Si el campo nunca se ha guardado (o ACF no está activo) devuelve el valor de
+ * inc/home-defaults.php. Si se ha guardado, devuelve lo guardado aunque esté vacío
+ * (así se puede vaciar a propósito, p. ej. el enlace de LinkedIn).
+ *
+ * @param string $name Nombre del campo (ver inc/acf-home.php).
+ * @return mixed
+ */
+function pedalnote_home( string $name ) {
+	static $defaults = null;
+	if ( null === $defaults ) {
+		$defaults = require PEDALNOTE_DIR . '/inc/home-defaults.php';
+	}
+	$default = $defaults[ $name ] ?? null;
+	$post_id = (int) get_option( 'page_on_front' );
+
+	if ( ! function_exists( 'get_field' ) || ! $post_id || ! metadata_exists( 'post', $post_id, $name ) ) {
+		return $default;
+	}
+
+	$value = get_field( $name, $post_id );
+
+	// Repetidores: si se han quedado sin filas, mejor el contenido del diseño que un hueco.
+	if ( is_array( $default ) && ( ! is_array( $value ) || ! $value ) ) {
+		return $default;
+	}
+	return $value ?? $default;
+}
+
+/**
+ * Foto de una sección: la elegida en la portada (Medios) o, si no hay, la del tema.
+ *
+ * @param string $field Campo de imagen (ACF, devuelve ID).
+ * @param string $name  Foto del tema en assets/img (respaldo).
+ * @param string $alt   Texto alternativo ('' si es decorativa).
+ * @param string $sizes Atributo sizes.
+ * @param array  $args  Los de pedalnote_picture().
+ */
+function pedalnote_home_picture( string $field, string $name, string $alt = '', string $sizes = '100vw', array $args = array() ): string {
+	$id = (int) pedalnote_home( $field );
+	if ( ! $id || ! wp_attachment_is_image( $id ) ) {
+		return pedalnote_picture( $name, $alt, $sizes, $args );
+	}
+
+	$priority = ! empty( $args['priority'] );
+	$img      = wp_get_attachment_image(
+		$id,
+		'full',
+		false,
+		array_filter(
+			array(
+				'alt'           => $alt,
+				'sizes'         => $sizes,
+				'class'         => $args['img_class'] ?? '',
+				'loading'       => $priority ? 'eager' : 'lazy',
+				'decoding'      => $priority ? 'sync' : 'async',
+				'fetchpriority' => $priority ? 'high' : '',
+			),
+			static fn( $v, $k ) => '' !== $v || 'alt' === $k,
+			ARRAY_FILTER_USE_BOTH
+		)
+	);
+
+	// Mismo envoltorio <picture> que las fotos del tema: los estilos no cambian.
+	return sprintf(
+		'<picture%s%s>%s</picture>',
+		empty( $args['class'] ) ? '' : ' class="' . esc_attr( $args['class'] ) . '"',
+		empty( $args['aria_hidden'] ) ? '' : ' aria-hidden="true"',
+		$img
+	);
+}
+
+/**
+ * Texto con saltos de línea respetados (escapado).
+ *
+ * @param string $text Texto plano.
+ */
+function pedalnote_lines( string $text ): string {
+	return nl2br( esc_html( trim( $text ) ), false );
+}
+
+/**
+ * Párrafos <p> a partir de un texto con líneas en blanco entre párrafos (escapado).
+ *
+ * @param string $text  Texto plano.
+ * @param string $class Clase opcional de cada <p>.
+ */
+function pedalnote_paragraphs( string $text, string $class = '' ): string {
+	$out = '';
+	foreach ( preg_split( '/\R\s*\R/', trim( $text ) ) ?: array() as $para ) {
+		$para = trim( $para );
+		if ( '' !== $para ) {
+			$out .= sprintf( '<p%s>%s</p>', $class ? ' class="' . esc_attr( $class ) . '"' : '', pedalnote_lines( $para ) );
+		}
+	}
+	return $out;
+}
+
+/**
+ * Une la posición fija de cada paso de un diagrama (del XD) con su texto (campo ACF).
+ *
+ * @param array  $layout Pasos con x, y, side, long (sin label), en orden de lectura.
+ * @param string $field  Repetidor de textos (sub-campo «label»).
+ */
+function pedalnote_diagram_steps( array $layout, string $field ): array {
+	$labels = array_values( (array) pedalnote_home( $field ) );
+	$steps  = array();
+	foreach ( $layout as $i => $step ) {
+		if ( isset( $labels[ $i ]['label'] ) && '' !== trim( (string) $labels[ $i ]['label'] ) ) {
+			$steps[] = $step + array( 'label' => $labels[ $i ]['label'] );
+		}
+	}
+	return $steps;
+}

@@ -8,8 +8,11 @@
  * @package pedalnote
  */
 
-// LinkedIn de la empresa (facilitado por el cliente, 5 nov 2026).
-$pedalnote_linkedin = 'https://www.linkedin.com/company/146620487/';
+// Datos de contacto: campos de la portada (pestaña «10 · Contacto»). También salen en las páginas legales.
+$pedalnote_email    = sanitize_email( (string) pedalnote_home( 'contact_email' ) );
+$pedalnote_phone    = trim( (string) pedalnote_home( 'contact_phone' ) );
+$pedalnote_tel      = preg_replace( '/[^\d+]/', '', $pedalnote_phone ); // enlace para llamar: solo dígitos y +
+$pedalnote_linkedin = (string) pedalnote_home( 'contact_linkedin' );
 
 $pedalnote_legal = array(
 	'aviso-legal'            => 'Aviso legal',
@@ -19,10 +22,14 @@ $pedalnote_legal = array(
 ?>
 <section class="contact" id="contacto" aria-labelledby="contacto-title">
 	<div class="contact__bar">
-		<h2 id="contacto-title" class="contact__title">Parlem?</h2>
+		<h2 id="contacto-title" class="contact__title"><?php echo esc_html( pedalnote_home( 'contact_title' ) ); ?></h2>
 		<ul class="contact__list" role="list">
-			<li><a href="mailto:coe@pedalnote.co">coe@pedalnote.co</a></li>
-			<li><a href="tel:+34625976453">+34 625 97 64 53</a></li>
+			<?php if ( $pedalnote_email ) : ?>
+				<li><a href="mailto:<?php echo esc_attr( $pedalnote_email ); ?>"><?php echo esc_html( $pedalnote_email ); ?></a></li>
+			<?php endif; ?>
+			<?php if ( $pedalnote_phone ) : ?>
+				<li><a href="tel:<?php echo esc_attr( $pedalnote_tel ); ?>"><?php echo esc_html( $pedalnote_phone ); ?></a></li>
+			<?php endif; ?>
 			<li>
 				<?php if ( $pedalnote_linkedin ) : ?>
 					<a href="<?php echo esc_url( $pedalnote_linkedin ); ?>" target="_blank" rel="noopener">Linkedin</a>
