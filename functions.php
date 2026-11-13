@@ -16,3 +16,4 @@ require PEDALNOTE_DIR . '/inc/helpers.php';
 require PEDALNOTE_DIR . '/inc/branding.php';
 require PEDALNOTE_DIR . '/inc/acf-home.php';
 require PEDALNOTE_DIR . '/inc/analytics.php';
+require PEDALNOTE_DIR . '/inc/mail.php';
